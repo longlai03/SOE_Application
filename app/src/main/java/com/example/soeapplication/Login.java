@@ -63,8 +63,6 @@ public class Login extends AppCompatActivity {
         boolean isValid = true;
         if (isEmpty(Username)) {
             UsernameLayout.setError("Không được để trống tên đăng nhập");
-
-            //HA hoc code ne
             isValid = false;
         } else {
             if (!isEmail(Username)) {
