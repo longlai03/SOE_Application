@@ -47,6 +47,22 @@ public class Login extends AppCompatActivity {
                 checkUserName();
             }
         });
+        Username.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    UsernameLayout.setError(null);
+                }
+            }
+        });
+        Password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    PasswordLayout.setError(null);
+                }
+            }
+        });
     }
 
     private void UIValue() {
@@ -58,6 +74,7 @@ public class Login extends AppCompatActivity {
         btnSignUp = findViewById(R.id.SignUp);
         btnLogin = findViewById(R.id.LoginBtn);
     }
+
 
     void checkUserName() {
         boolean isValid = true;
