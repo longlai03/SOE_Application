@@ -69,6 +69,7 @@ public class Login extends AppCompatActivity {
                 UsernameLayout.setError("Email không tồn tại");
             }
         }
+        //HA hoc code ne
         if (isEmpty(Password)) {
             PasswordLayout.setError("Không được để trống mật khẩu");
             isValid = false;
