@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,10 +18,12 @@ import android.widget.Toast;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+
 public class Login extends AppCompatActivity {
     TextInputEditText Username, Password;
     TextInputLayout UsernameLayout, PasswordLayout;
-    TextView btnForgotPassword, btnSignUp, btnLogin;
+    TextView btnForgotPassword, btnSignUp;
+    Button btnLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -13,6 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "SOE Application"
+rootProject.name = "SOE Applicationn"
 include(":app")
  
