@@ -14,6 +14,7 @@ public class Signup extends AppCompatActivity {
     TextInputLayout UsernameLayout, PasswordLayout, ConfirmPasswordLayout;
     TextInputEditText Username, Password, ConfirmPassword;
 
+
 //    private
 
     @Override
