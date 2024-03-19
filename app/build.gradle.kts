@@ -1,5 +1,6 @@
 plugins {
     id("com.android.application")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -36,7 +37,14 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("com.squareup.retrofit2:retrofit:(insert latest version)")
+//    implementation("com.squareup.retrofit2:retrofit:(insert latest version)")
+    // Import the Firebase BoM
+    implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
+    // TODO: Add the dependencies for Firebase products you want to use
+    implementation("com.google.firebase:firebase-auth")
+    // When using the BoM, don't specify versions in Firebase dependencies
+    implementation("com.google.firebase:firebase-analytics")
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
