@@ -30,7 +30,8 @@ public class Signup extends AppCompatActivity {
         });
 
     }
-    private void UIValue(){
+
+    private void UIValue() {
         btnLogin = findViewById(R.id.Login);
         UsernameLayout = findViewById(R.id.usernameLayout);
         PasswordLayout = findViewById(R.id.passwordLayout);
