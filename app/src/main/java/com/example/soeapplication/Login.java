@@ -1,17 +1,14 @@
 package com.example.soeapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,7 +66,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void UIValue() {
-        Username = findViewById(R.id.Username);
+        Username = findViewById(R.id.Address);
         Password = findViewById(R.id.Password);
         UsernameLayout = findViewById(R.id.usernameLayout);
         PasswordLayout = findViewById(R.id.passwordLayout);
@@ -89,7 +86,6 @@ public class Login extends AppCompatActivity {
                 UsernameLayout.setError("Email không tồn tại");
             }
         }
-        //HA hoc code ne
         if (isEmpty(Password)) {
             PasswordLayout.setError("Không được để trống mật khẩu");
             isValid = false;
