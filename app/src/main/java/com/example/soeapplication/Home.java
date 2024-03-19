@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class Home extends AppCompatActivity {
     ConstraintLayout Logo;
 
@@ -16,6 +19,12 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         UIValue();
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("message");
+
+        myRef.setValue("Hello, World!");
+
         Logo.setVisibility(View.VISIBLE);
         new Handler().postDelayed(new Runnable() {
             @Override

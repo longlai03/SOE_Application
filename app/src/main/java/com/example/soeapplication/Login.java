@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,10 +18,12 @@ import android.widget.Toast;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+
 public class Login extends AppCompatActivity {
     TextInputEditText Username, Password;
     TextInputLayout UsernameLayout, PasswordLayout;
-    TextView btnForgotPassword, btnSignUp, btnLogin;
+    TextView btnForgotPassword, btnSignUp;
+    Button btnLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,22 @@ public class Login extends AppCompatActivity {
                 checkUserName();
             }
         });
+        Username.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    UsernameLayout.setError(null);
+                }
+            }
+        });
+        Password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    PasswordLayout.setError(null);
+                }
+            }
+        });
     }
 
     private void UIValue() {
@@ -58,6 +77,7 @@ public class Login extends AppCompatActivity {
         btnSignUp = findViewById(R.id.SignUp);
         btnLogin = findViewById(R.id.LoginBtn);
     }
+
 
     void checkUserName() {
         boolean isValid = true;
