@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Signup">
+    tools:context=".activity.Signup">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -73,8 +73,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="1dp"
+                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/montserrat_light"
                     android:text="Bạn đã có tài khoản?"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/Login"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/ggbtn" />
@@ -85,10 +87,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="1dp"
                     android:layout_marginTop="16dp"
+                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/montserrat_bold"
                     android:text="Đăng nhập"
                     android:textColor="#003C91"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textView8"
                     app:layout_constraintTop_toBottomOf="@+id/fbBtn" />
@@ -151,6 +155,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Nhập tên"
                     android:padding="20dp"
+                    android:singleLine="true"
                     android:textColorHint="@color/hint_text_color_dim" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -227,11 +232,12 @@
                 tools:cursorColor="#0021FA">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/Address"
+                    android:id="@+id/Username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nhập địa chỉ Email"
                     android:padding="20dp"
+                    android:singleLine="true"
                     android:textColorHint="@color/hint_text_color_dim" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -259,6 +265,7 @@
                     android:hint="Nhập mật khẩu"
                     android:inputType="textPassword"
                     android:padding="20dp"
+                    android:singleLine="true"
                     android:textColorHint="@color/hint_text_color_dim" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -286,6 +293,7 @@
                     android:hint="Nhập lại mật khẩu"
                     android:inputType="textPassword"
                     android:padding="20dp"
+                    android:singleLine="true"
                     android:textColorHint="@color/hint_text_color_dim" />
 
             </com.google.android.material.textfield.TextInputLayout>

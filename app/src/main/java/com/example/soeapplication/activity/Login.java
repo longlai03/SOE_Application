@@ -1,5 +1,6 @@
-package com.example.soeapplication;
+package com.example.soeapplication.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,10 +11,15 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.soeapplication.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class Login extends AppCompatActivity {
@@ -21,6 +27,8 @@ public class Login extends AppCompatActivity {
     TextInputLayout UsernameLayout, PasswordLayout;
     TextView btnForgotPassword, btnSignUp;
     Button btnLogin;
+    FirebaseAuth mAuth;
+    FirebaseUser mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +52,9 @@ public class Login extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkUserName();
+                if(checkUserName()){
+                    DangNhap();
+                }
             }
         });
         Username.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -66,21 +76,22 @@ public class Login extends AppCompatActivity {
     }
 
     private void UIValue() {
-        Username = findViewById(R.id.Address);
+        Username = findViewById(R.id.Username);
         Password = findViewById(R.id.Password);
         UsernameLayout = findViewById(R.id.usernameLayout);
         PasswordLayout = findViewById(R.id.passwordLayout);
         btnForgotPassword = findViewById(R.id.ForgotPassword);
         btnSignUp = findViewById(R.id.SignUp);
         btnLogin = findViewById(R.id.LoginBtn);
+        mAuth = FirebaseAuth.getInstance();
     }
 
 
-    void checkUserName() {
-        boolean isValid = true;
+    private boolean checkUserName() {
+        boolean flag = true;
         if (isEmpty(Username)) {
             UsernameLayout.setError("Không được để trống tên đăng nhập");
-            isValid = false;
+            flag = false;
         } else {
             if (!isEmail(Username)) {
                 UsernameLayout.setError("Email không tồn tại");
@@ -88,28 +99,38 @@ public class Login extends AppCompatActivity {
         }
         if (isEmpty(Password)) {
             PasswordLayout.setError("Không được để trống mật khẩu");
-            isValid = false;
-        }
-        if (isValid) {
-            String usernameValue = Username.getText().toString();
-            String passwordValue = Password.getText().toString();
-            if (usernameValue.equals("test@test.com") && passwordValue.equals("12345678")) {
-                //Xu ly
-                finish();
-            } else {
-                Toast t = Toast.makeText(this, "Nhập sai tên tài khoản hoặc mật khẩu", Toast.LENGTH_SHORT);
-                t.show();
-            }
+            flag = false;
         }
         Log.e("ABC","--> Username:"+ Username.getText().toString());
+        return flag;
+    }
+    private void DangNhap(){
+        String username = Username.getText().toString().trim();
+        String password = Password.getText().toString().trim();
+        mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    mUser = mAuth.getCurrentUser();
+                    Intent resultIntent = new Intent();
+                    resultIntent.putExtra("firebaseUser", mUser);
+                    setResult(RESULT_OK, resultIntent);
+                    finish();
+                }
+                else{
+                    UsernameLayout.setError("Nhập sai tài khoản hoặc mật khẩu");
+                }
+            }
+        });
     }
 
-    boolean isEmail(TextInputEditText text) {
+
+    private boolean isEmail(TextInputEditText text) {
         CharSequence email = text.getText().toString();
         return (!TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches());
     }
 
-    boolean isEmpty(TextInputEditText text) {
+    private boolean isEmpty(TextInputEditText text) {
         CharSequence str = text.getText().toString();
         return TextUtils.isEmpty(str);
     }
