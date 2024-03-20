@@ -21,7 +21,7 @@ public class Signup extends AppCompatActivity {
     TextView btnLogin;
     TextInputLayout UsernameLayout, PasswordLayout, ConfirmPasswordLayout;
     TextInputEditText Name, Password, ConfirmPassword, Address;
-    Button LoginBtn;
+    Button SignupBtn;
     RadioButton radiobtnNu,radiobtnNam;
     RadioGroup radioGroup;
 
@@ -33,7 +33,7 @@ public class Signup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         UIValue();
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        SignupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 checkDataEntered(Name, Password , ConfirmPassword, Address);
@@ -53,7 +53,7 @@ public class Signup extends AppCompatActivity {
         Address = findViewById(R.id.Address);
         Password = findViewById(R.id.Password);
         ConfirmPassword = findViewById(R.id.ConfirmPassword);
-        LoginBtn = findViewById(R.id.LoginBtn);
+        SignupBtn = findViewById(R.id.LoginBtn);
         radiobtnNu = findViewById(R.id.radiobtnNu);
         radiobtnNam = findViewById(R.id.radiobtnNam);
         radioGroup =  findViewById(R.id.radioGroup);
@@ -70,7 +70,7 @@ public class Signup extends AppCompatActivity {
             Password.setError("Cần nhập mật khẩu");
         }
         if (isEmpty(ConfirmPassword)) {
-            Password.setError("Cần nhập mật khẩu");
+            ConfirmPassword.setError("Cần nhập mật khẩu");
         }
         if (isEmail(Address) == false) {
             Address.setError("Vui lòng nhập email hợp lệ!");
