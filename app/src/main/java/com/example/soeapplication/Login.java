@@ -66,7 +66,7 @@ public class Login extends AppCompatActivity {
     }
 
     private void UIValue() {
-        Username = findViewById(R.id.Address);
+        Username = findViewById(R.id.Username);
         Password = findViewById(R.id.Password);
         UsernameLayout = findViewById(R.id.usernameLayout);
         PasswordLayout = findViewById(R.id.passwordLayout);

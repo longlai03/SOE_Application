@@ -72,8 +72,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="1dp"
+                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/montserrat_light"
                     android:text="Bạn đã có tài khoản?"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/Login"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/ggbtn" />
@@ -84,10 +86,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="1dp"
                     android:layout_marginTop="16dp"
+                    android:layout_marginBottom="10dp"
                     android:fontFamily="@font/montserrat_bold"
                     android:text="Đăng nhập"
                     android:textColor="#003C91"
                     android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/textView8"
                     app:layout_constraintTop_toBottomOf="@+id/fbBtn" />
@@ -150,6 +154,7 @@
                     android:layout_height="wrap_content"
                     android:hint="Nhập tên"
                     android:padding="20dp"
+                    android:singleLine="true"
                     android:textColorHint="@color/hint_text_color_dim" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -185,7 +190,6 @@
                     android:orientation="horizontal"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/textView4"
                     app:layout_constraintTop_toTopOf="parent">
 
                     <RadioButton
@@ -194,7 +198,6 @@
                         android:layout_height="wrap_content"
                         android:buttonTint="#0D5FAB"
                         android:text="Nam"
-                        android:checked="true"
                         android:textAlignment="center"
                         android:textSize="16sp" />
 
@@ -208,12 +211,6 @@
                         android:textSize="16sp" />
                 </RadioGroup>
 
-                <RadioGroup
-                    android:id="@+id/radioGroup2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="@+id/textView4"
-                    tools:layout_editor_absoluteY="25dp" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -234,11 +231,12 @@
                 tools:cursorColor="#0021FA">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/Address"
+                    android:id="@+id/Username"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nhập địa chỉ Email"
                     android:padding="20dp"
+                    android:singleLine="true"
                     android:textColorHint="@color/hint_text_color_dim" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -266,6 +264,7 @@
                     android:hint="Nhập mật khẩu"
                     android:inputType="textPassword"
                     android:padding="20dp"
+                    android:singleLine="true"
                     android:textColorHint="@color/hint_text_color_dim" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -293,6 +292,7 @@
                     android:hint="Nhập lại mật khẩu"
                     android:inputType="textPassword"
                     android:padding="20dp"
+                    android:singleLine="true"
                     android:textColorHint="@color/hint_text_color_dim" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -312,7 +312,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/ConfrimPasswordLayout" />
 
             <Button
-                android:id="@+id/LoginBtn"
+                android:id="@+id/SignupBtn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
