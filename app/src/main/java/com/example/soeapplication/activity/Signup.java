@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.soeapplication.R;
+import com.example.soeapplication.UserClass;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -24,6 +25,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Signup extends AppCompatActivity {
     TextView btnLogin;
@@ -34,6 +37,8 @@ public class Signup extends AppCompatActivity {
     RadioGroup radioGroup;
     FirebaseAuth mAuth;
     FirebaseUser mUser;
+    FirebaseDatabase Database;
+    DatabaseReference reference;
 
 //    private
 
@@ -143,23 +148,28 @@ public class Signup extends AppCompatActivity {
     }
 
     private void GT(boolean flag) {
-        String s = "";
-        if (radiobtnNu.isChecked())
-            s = radiobtnNu.getText().toString();
-        else if (radiobtnNam.isChecked()) {
-            s = radiobtnNam.getText().toString();
-        }
+        String s = GTValue();
         if (s.equals("")) {
             Toast t = Toast.makeText(this, "Bạn phải chọn giới tính ", Toast.LENGTH_SHORT);
             t.show();
             flag = false;
         }
     }
+    private String GTValue(){
+        String s = "";
+        if (radiobtnNu.isChecked())
+            s = radiobtnNu.getText().toString();
+        else if (radiobtnNam.isChecked()) {
+            s = radiobtnNam.getText().toString();
+        }
+        return s;
+    }
 
     private void DangKy() {
         String name = Name.getText().toString().trim();
         String username = Address.getText().toString().trim();
         String password = Password.getText().toString().trim();
+        String sex = GTValue();
         Log.e("this", "Username: " + username);
         Log.e("this", "Password: " + password);
         mAuth.createUserWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -167,24 +177,23 @@ public class Signup extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     mUser = mAuth.getCurrentUser();
-                    UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
-                            .setDisplayName(name)
-                            .build();
-                    mUser.updateProfile(profileChangeRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Toast t = Toast.makeText(Signup.this, "Đăng ký thành công", Toast.LENGTH_SHORT);
-                                t.show();
-                                finish();
-                            }
-                        }
-                    });
+                    Toast t = Toast.makeText(Signup.this, "Đăng ký thành công", Toast.LENGTH_SHORT);
+                    t.show();
+                    setDatabase(mUser, sex, name);
+                    finish();
                 } else {
                     Log.e("this", "Message: " + task.getException());
                     UsernameLayout.setError("Tài khoản này đã tồn tại");
                 }
             }
         });
+    }
+
+    private void setDatabase(FirebaseUser user, String sex, String name) {
+        Database = FirebaseDatabase.getInstance();
+        reference = Database.getReference("user");
+
+        UserClass userClass = new UserClass(user.getUid(), sex, name, user.getEmail());
+        reference.child(name).setValue(userClass);
     }
 }

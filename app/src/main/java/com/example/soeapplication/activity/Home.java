@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.soeapplication.R;
+import com.example.soeapplication.UserClass;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -24,6 +25,8 @@ import com.google.firebase.database.FirebaseDatabase;
 public class Home extends AppCompatActivity {
     ConstraintLayout Logo;
     FirebaseUser mUser;
+    FirebaseDatabase Database;
+    DatabaseReference reference;
     private ActivityResultLauncher<Intent> mActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult()
             , new ActivityResultCallback<ActivityResult>() {
                 @Override
@@ -86,4 +89,5 @@ public class Home extends AppCompatActivity {
         AlertDialog a = builder.create();
         a.show();
     }
+
 }
