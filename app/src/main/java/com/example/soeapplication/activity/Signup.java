@@ -1,9 +1,8 @@
-package com.example.soeapplication;
+package com.example.soeapplication.activity;
 
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -16,12 +15,15 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.soeapplication.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 
 public class Signup extends AppCompatActivity {
     TextView btnLogin;
@@ -31,7 +33,7 @@ public class Signup extends AppCompatActivity {
     RadioButton radiobtnNu, radiobtnNam;
     RadioGroup radioGroup;
     FirebaseAuth mAuth;
-
+    FirebaseUser mUser;
 
 //    private
 
@@ -96,6 +98,7 @@ public class Signup extends AppCompatActivity {
         radioGroup = findViewById(R.id.radioGroup);
         NameLayout = findViewById(R.id.nameLayout);
         mAuth = FirebaseAuth.getInstance();
+//        mUser = mAuth.getCurrentUser();
     }
 
     private boolean checkDataEntered() {
@@ -112,11 +115,11 @@ public class Signup extends AppCompatActivity {
             UsernameLayout.setError("Vui lòng nhập email hợp lệ!");
             flag = false;
         }
-        if(!isPassword(Password)){
+        if (!isPassword(Password)) {
             PasswordLayout.setError("Mật khẩu cần ít nhất 8 ký tự và chứa cả số lẫn chữ cái");
             flag = false;
         }
-        if(!Password.getText().toString().equals(ConfirmPassword.getText().toString())){
+        if (!Password.getText().toString().equals(ConfirmPassword.getText().toString())) {
             ConfirmPasswordLayout.setError("Hãy nhập mật khẩu xác nhận giống với mật khẩu của bạn");
             flag = false;
         }
@@ -133,9 +136,10 @@ public class Signup extends AppCompatActivity {
         CharSequence str = text.getText().toString();
         return TextUtils.isEmpty(str);
     }
-    private boolean isPassword(TextInputEditText text){
+
+    private boolean isPassword(TextInputEditText text) {
         CharSequence password = text.getText().toString();
-        return !TextUtils.isDigitsOnly(password) && password.length()>=8;
+        return !TextUtils.isDigitsOnly(password) && password.length() >= 8;
     }
 
     private void GT(boolean flag) {
@@ -153,19 +157,31 @@ public class Signup extends AppCompatActivity {
     }
 
     private void DangKy() {
+        String name = Name.getText().toString().trim();
         String username = Address.getText().toString().trim();
         String password = Password.getText().toString().trim();
-        Log.e("this", "Username: "+username);
-        Log.e("this", "Password: "+password);
+        Log.e("this", "Username: " + username);
+        Log.e("this", "Password: " + password);
         mAuth.createUserWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    Toast t = Toast.makeText(Signup.this,"Đăng ký thành công", Toast.LENGTH_SHORT);
-                    t.show();
-                    finish();
+                    mUser = mAuth.getCurrentUser();
+                    UserProfileChangeRequest profileChangeRequest = new UserProfileChangeRequest.Builder()
+                            .setDisplayName(name)
+                            .build();
+                    mUser.updateProfile(profileChangeRequest).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast t = Toast.makeText(Signup.this, "Đăng ký thành công", Toast.LENGTH_SHORT);
+                                t.show();
+                                finish();
+                            }
+                        }
+                    });
                 } else {
-                    Log.e("this","Message: "+ task.getException());
+                    Log.e("this", "Message: " + task.getException());
                     UsernameLayout.setError("Tài khoản này đã tồn tại");
                 }
             }

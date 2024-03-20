@@ -1,4 +1,4 @@
-package com.example.soeapplication;
+package com.example.soeapplication.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -6,6 +6,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.soeapplication.R;
 
 public class ForgotPassword extends AppCompatActivity {
     ConstraintLayout ConfirmEmailLayout;
