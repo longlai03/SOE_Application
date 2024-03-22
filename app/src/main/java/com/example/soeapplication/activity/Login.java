@@ -134,4 +134,13 @@ public class Login extends AppCompatActivity {
         CharSequence str = text.getText().toString();
         return TextUtils.isEmpty(str);
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (mUser == null) {
+            setResult(RESULT_CANCELED);
+            finish();
+        }
+    }
 }

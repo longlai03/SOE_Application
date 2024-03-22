@@ -23,10 +23,22 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Home extends AppCompatActivity {
-    ConstraintLayout Logo;
+
     FirebaseUser mUser;
+    FirebaseAuth mAuth;
     FirebaseDatabase Database;
     DatabaseReference reference;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_home);
+        UIValue();
+        if (mUser == null) {
+            LoginActivity();
+        }
+
+    }
     private ActivityResultLauncher<Intent> mActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult()
             , new ActivityResultCallback<ActivityResult>() {
                 @Override
@@ -39,31 +51,11 @@ public class Home extends AppCompatActivity {
                             Log.e("This", "mUser = " + mUser.getEmail());
                             UserInformation();
                         }
+                    } else {
+                        finish();
                     }
                 }
             });
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
-        UIValue();
-
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference myRef = database.getReference("message");
-
-//        myRef.setValue("Hello, World!");
-
-        Logo.setVisibility(View.VISIBLE);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Logo.setVisibility(View.GONE);
-                LoginActivity();
-            }
-        }, 2000);  // Ẩn layout sau 2 giây
-
-    }
 
     private void LoginActivity() {
         Intent i = new Intent(this, Login.class);
@@ -71,15 +63,16 @@ public class Home extends AppCompatActivity {
     }
 
     private void UIValue() {
-        Logo = findViewById(R.id.Logo);
-        mUser = FirebaseAuth.getInstance().getCurrentUser();
+        mAuth = FirebaseAuth.getInstance();
+        mUser = mAuth.getCurrentUser();
     }
-    private void UserInformation(){
+
+    private void UserInformation() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Thông tin người dùng");
-        builder.setMessage("Name: "+mUser.getDisplayName()
-                +"\nEmail: "+mUser.getEmail()
-                +"\nUid: "+mUser.getUid());
+        builder.setMessage("Name: " + mUser.getDisplayName()
+                + "\nEmail: " + mUser.getEmail()
+                + "\nUid: " + mUser.getUid());
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -90,4 +83,9 @@ public class Home extends AppCompatActivity {
         a.show();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mAuth.signOut();
+    }
 }
