@@ -14,10 +14,6 @@
         android:icon="@drawable/baseline_add_shopping_cart_24"
         android:title="Cart" />
     <item
-        android:id="@+id/bottom_search"
-        android:icon="@drawable/baseline_build_24"
-        android:title="Search" />
-    <item
         android:id="@+id/bottom_user"
         android:icon="@drawable/baseline_account_circle_32"
         android:title="User" />
