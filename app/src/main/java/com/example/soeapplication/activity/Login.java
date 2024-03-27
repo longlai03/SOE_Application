@@ -136,11 +136,10 @@ public class Login extends AppCompatActivity {
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
+    protected void onDestroy() {
+        super.onDestroy();
         if (mUser == null) {
             setResult(RESULT_CANCELED);
-            finish();
         }
     }
 }

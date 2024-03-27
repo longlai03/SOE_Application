@@ -103,7 +103,7 @@ public class Signup extends AppCompatActivity {
         radioGroup = findViewById(R.id.radioGroup);
         NameLayout = findViewById(R.id.nameLayout);
         mAuth = FirebaseAuth.getInstance();
-//        mUser = mAuth.getCurrentUser();
+        mUser = mAuth.getCurrentUser();
     }
 
     private boolean checkDataEntered() {
