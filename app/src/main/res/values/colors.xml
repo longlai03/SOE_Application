@@ -5,4 +5,5 @@
     <color name="hint_text_color_dim">#757575</color>
     <color name="bold_blue">#0D5FAB</color>
     <color name="dim_white">#F2F2F2</color>
+    <color name="light_blue">#DEF2FF</color>
 </resources>

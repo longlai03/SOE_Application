@@ -1,5 +1,6 @@
 package com.example.soeapplication.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -11,10 +12,11 @@ import android.view.ViewGroup;
 
 import com.example.soeapplication.ProductClass;
 import com.example.soeapplication.R;
+import com.example.soeapplication.activity.AddProduct;
 import com.example.soeapplication.adapter.ProductAdapter;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -66,13 +68,14 @@ public class HomeFragment extends Fragment {
     private RecyclerView product_recycleview;
     private ArrayList<ProductClass> product_list;
     private ProductAdapter productAdapter;
+    private FloatingActionButton addProductButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        product_recycleview = view.findViewById(R.id.ProductListRecycleView);
+        AnhXa(view);
         product_list = getProduct_list();
         productAdapter = new ProductAdapter(getActivity(), product_list);
 
@@ -80,13 +83,20 @@ public class HomeFragment extends Fragment {
         product_recycleview.setLayoutManager(gridLayoutManager);
         product_recycleview.setAdapter(productAdapter);
 
+        addProductButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), AddProduct.class);
+                startActivity(i);
+            }
+        });
+
         return view;
     }
 
     private ArrayList<ProductClass> getProduct_list(){
         ArrayList<ProductClass> list = new ArrayList<>();
-        list.add(new ProductClass("Kem", "Mon kem xua tan met moi sau chuoi ngay lam viec vat va","10000", "link"));
-        list.add(new ProductClass("Kem", "Mon kem xua tan met moi sau chuoi ngay lam viec vat va","10000", "link"));
+        list.add(new ProductClass("Kem", "Mon kem xua tan met moi sau chuoi ngay lam viec vat va","10000", "https://vntalking.com/wp-content/uploads/2019/04/hoc-react-native-tu-co-ban.png"));
 
         list.add(new ProductClass("Kem", "Mon kem xua tan met moi sau chuoi ngay lam viec vat va","10000", "link"));
         list.add(new ProductClass("Kem", "Mon kem xua tan met moi sau chuoi ngay lam viec vat va","10000", "link"));
@@ -95,5 +105,9 @@ public class HomeFragment extends Fragment {
         list.add(new ProductClass("Kem", "Mon kem xua tan met moi sau chuoi ngay lam viec vat va","10000", "link"));
 
         return list;
+    }
+    private void AnhXa(View view){
+        product_recycleview = view.findViewById(R.id.ProductListRecycleView);
+        addProductButton = view.findViewById(R.id.fb_addProduct);
     }
 }

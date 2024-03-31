@@ -318,7 +318,7 @@
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="40dp"
-                android:backgroundTint="#0D5FAB"
+                android:backgroundTint="@color/bold_blue"
                 android:padding="8dp"
                 android:text="Đăng Ký"
                 android:textSize="24sp"
