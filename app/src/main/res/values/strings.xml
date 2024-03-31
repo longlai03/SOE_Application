@@ -7,4 +7,6 @@
     <string name="chat_fragment">ChatFragment</string>
     <string name="cart_fragment">CartFragment</string>
     <string name="user_fragment">UserFragment</string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

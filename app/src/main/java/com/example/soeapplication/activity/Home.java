@@ -44,7 +44,7 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         UIValue();
-        ViewPagerAdapter view_adapter = new ViewPagerAdapter(getSupportFragmentManager(), getLifecycle());
+        ViewPagerAdapter view_adapter = new ViewPagerAdapter(Home.this);
         viewPager2.setAdapter(view_adapter);
         if (mUser == null) {
             LoginActivity();
