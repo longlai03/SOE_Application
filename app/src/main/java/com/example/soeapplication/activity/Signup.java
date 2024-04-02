@@ -1,9 +1,6 @@
 package com.example.soeapplication.activity;
 
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -15,6 +12,9 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.soeapplication.R;
 import com.example.soeapplication.UserClass;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,7 +24,6 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -116,7 +115,7 @@ public class Signup extends AppCompatActivity {
             PasswordLayout.setError("Cần nhập mật khẩu");
             flag = false;
         }
-        if (isEmail(Address) == false) {
+        if (!isEmail(Address)) {
             UsernameLayout.setError("Vui lòng nhập email hợp lệ!");
             flag = false;
         }
@@ -194,6 +193,6 @@ public class Signup extends AppCompatActivity {
         reference = Database.getReference("user");
 
         UserClass userClass = new UserClass(user.getUid(), sex, name, user.getEmail());
-        reference.child(name).setValue(userClass);
+        reference.child(user.getUid()).setValue(userClass);
     }
 }

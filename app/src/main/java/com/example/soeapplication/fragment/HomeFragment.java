@@ -2,19 +2,26 @@ package com.example.soeapplication.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.soeapplication.ProductClass;
 import com.example.soeapplication.R;
 import com.example.soeapplication.activity.AddProduct;
 import com.example.soeapplication.adapter.ProductAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -22,7 +29,6 @@ import java.util.ArrayList;
  * A simple {@link Fragment} subclass.
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
- *
  */
 public class HomeFragment extends Fragment {
 
@@ -65,9 +71,12 @@ public class HomeFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+
     private RecyclerView product_recycleview;
     private ArrayList<ProductClass> product_list;
     private ProductAdapter productAdapter;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference product_databaseReference;
     private FloatingActionButton addProductButton;
 
     @Override
@@ -76,7 +85,7 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         AnhXa(view);
-        product_list = getProduct_list();
+        product_list = new ArrayList<>();
         productAdapter = new ProductAdapter(getActivity(), product_list);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
@@ -90,24 +99,39 @@ public class HomeFragment extends Fragment {
                 startActivity(i);
             }
         });
+        getProduct_list();
 
         return view;
     }
 
-    private ArrayList<ProductClass> getProduct_list(){
-        ArrayList<ProductClass> list = new ArrayList<>();
-        list.add(new ProductClass("Kem", "Mon kem xua tan met moi sau chuoi ngay lam viec vat va","10000", "https://vntalking.com/wp-content/uploads/2019/04/hoc-react-native-tu-co-ban.png"));
+    private void getProduct_list() {
+        //Them danh sach vao day
+        product_databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(product_list != null){
+                    product_list.clear();
+                }
+                for(DataSnapshot userSnapshot: snapshot.getChildren()) {
+                    for (DataSnapshot productSnapshot : userSnapshot.getChildren()) {
+                        ProductClass product = productSnapshot.getValue(ProductClass.class);
+                        product_list.add(product);
+                    }
+                    productAdapter.notifyDataSetChanged();
+                }
+            }
 
-        list.add(new ProductClass("Kem", "Mon kem xua tan met moi sau chuoi ngay lam viec vat va","10000", "link"));
-        list.add(new ProductClass("Kem", "Mon kem xua tan met moi sau chuoi ngay lam viec vat va","10000", "link"));
-
-        list.add(new ProductClass("Kem", "Mon kem xua tan met moi sau chuoi ngay lam viec vat va","10000", "link"));
-        list.add(new ProductClass("Kem", "Mon kem xua tan met moi sau chuoi ngay lam viec vat va","10000", "link"));
-
-        return list;
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("FirebaseError", "Error reading data: " + error.getMessage());
+            }
+        });
     }
-    private void AnhXa(View view){
+
+    private void AnhXa(View view) {
         product_recycleview = view.findViewById(R.id.ProductListRecycleView);
         addProductButton = view.findViewById(R.id.fb_addProduct);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        product_databaseReference = firebaseDatabase.getReference("product");
     }
 }

@@ -1,27 +1,20 @@
 package com.example.soeapplication.activity;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.MenuItem;
+
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.annotation.SuppressLint;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
-import android.view.MenuItem;
-import android.view.View;
-
 import com.example.soeapplication.R;
-import com.example.soeapplication.UserClass;
 import com.example.soeapplication.adapter.ViewPagerAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -73,7 +66,6 @@ public class Home extends AppCompatActivity {
                         bottomNavigationView.getMenu().findItem(R.id.bottom_user).setChecked(true);
                         break;
                 }
-
             }
 
             @Override
@@ -102,7 +94,7 @@ public class Home extends AppCompatActivity {
             }
         });
     }
-    private ActivityResultLauncher<Intent> mActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult()
+    private final ActivityResultLauncher<Intent> mActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult()
             , new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
@@ -112,7 +104,6 @@ public class Home extends AppCompatActivity {
                         if (intent != null && intent.hasExtra("firebaseUser")) {
                             mUser = intent.getParcelableExtra("firebaseUser");
                             Log.e("This", "mUser = " + mUser.getEmail());
-                            UserInformation();
                         }
                     } else {
                         finish();
@@ -132,25 +123,15 @@ public class Home extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottom_navigation);
     }
 
-    private void UserInformation() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Thông tin người dùng");
-        builder.setMessage("Name: " + mUser.getDisplayName()
-                + "\nEmail: " + mUser.getEmail()
-                + "\nUid: " + mUser.getUid());
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        AlertDialog a = builder.create();
-        a.show();
-    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Log.e("this", "mUser: "+ mUser);
         mAuth.signOut();
+        if(mUser != null) {
+            mUser = null;
+        }
+        Log.e("this", "mUser: "+ mUser);
     }
 }

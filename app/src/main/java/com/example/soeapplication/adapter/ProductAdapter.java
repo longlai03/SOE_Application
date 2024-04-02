@@ -35,12 +35,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         ProductClass product = productList.get(position);
-        if(product == null){
-            return;
-        }
+
         Glide.with(context).load(product.getImageUrl()).into(holder.Product_image);
         holder.Product_title.setText(product.getName());
-        holder.Product_info.setText(product.getInfomation());
+        holder.Product_info.setText(product.getShortInfomation());
         holder.Product_cost.setText(product.getCost());
     }
 
