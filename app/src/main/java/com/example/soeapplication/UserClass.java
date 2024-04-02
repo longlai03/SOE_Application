@@ -1,7 +1,5 @@
 package com.example.soeapplication;
 
-import com.google.firebase.auth.FirebaseUser;
-
 public class UserClass {
     String mUserId, sex, name, email;
 
