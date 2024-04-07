@@ -1,5 +1,6 @@
 package com.example.soeapplication.activity;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -8,9 +9,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -120,6 +119,10 @@ public class AddProduct extends AppCompatActivity {
     }
 
     private void ThemAnh() {
+        ProgressDialog progressDialog = new ProgressDialog(AddProduct.this);
+        progressDialog.setMessage("Đang tải ảnh lên...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
         String imageName = "image_" + UUID.randomUUID().toString() + ".jpg";
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -138,6 +141,7 @@ public class AddProduct extends AppCompatActivity {
                     public void onSuccess(Uri uri) {
                         imageUri = uri.toString();
                         Log.e("this", "imageuri: " + imageUri);
+                        progressDialog.dismiss();
                         ThemSP();
                     }
                 });
@@ -145,13 +149,17 @@ public class AddProduct extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
+                progressDialog.dismiss();
                 Toast.makeText(AddProduct.this, "Lỗi khi tải lên hình ảnh sản phẩm, hãy thử lại", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void ThemSP() {
-
+        ProgressDialog progressDialog = new ProgressDialog(AddProduct.this);
+        progressDialog.setMessage("Đang thêm sản phẩm...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
         Log.e("this", "Ham nay da duoc goi");
         String product_useruid = mUser.getUid();
         String product_name = edittext_product_name.getText().toString();
@@ -162,8 +170,11 @@ public class AddProduct extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         productReference = firebaseDatabase.getReference("product");
 
-        ProductClass productClass = new ProductClass(product_useruid, product_name, product_info, product_cost, product_image);
-        productReference.child(product_useruid).child(product_name).setValue(productClass);
+        String product_id = productReference.push().getKey();
+
+        ProductClass productClass = new ProductClass(product_useruid, product_name, product_info, product_cost, product_image, product_id);
+        productReference.child(product_id).setValue(productClass);
+        progressDialog.dismiss();
         Toast.makeText(AddProduct.this, "Sản phẩm đã được tải lên thành công", Toast.LENGTH_SHORT).show();
 
         finish();
@@ -221,8 +232,6 @@ public class AddProduct extends AppCompatActivity {
         Drawable drawable = imageButton.getDrawable();
         if (drawable != null && drawable.getConstantState() != null) {
             Drawable defaultDrawable = getResources().getDrawable(R.drawable.baseline_add_a_photo_24, this.getTheme());
-            Log.e("this", "defaultDrawable: " + defaultDrawable.getConstantState());
-            Log.e("this", "thisDrawable: " + drawable.getConstantState());
             return !drawable.getConstantState().equals(defaultDrawable.getConstantState());
         } else {
             return false;
