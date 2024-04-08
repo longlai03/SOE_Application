@@ -107,7 +107,7 @@ public class Login extends AppCompatActivity {
     }
     private void DangNhap(){
         ProgressDialog progressDialog = new ProgressDialog(this);
-        progressDialog.setTitle("Dang nhap...");
+        progressDialog.setTitle("Đang đăng nhập...");
         progressDialog.show();
         String username = Username.getText().toString().trim();
         String password = Password.getText().toString().trim();

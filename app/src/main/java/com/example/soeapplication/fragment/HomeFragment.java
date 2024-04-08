@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -88,6 +89,7 @@ public class HomeFragment extends Fragment {
     private DatabaseReference product_databaseReference;
     private FloatingActionButton addProductButton;
     private CircleImageView avatar_button;
+    private TextView numberofProduct;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -154,6 +156,7 @@ public class HomeFragment extends Fragment {
                 for (DataSnapshot productSnapshot : snapshot.getChildren()) {
                     ProductClass product = productSnapshot.getValue(ProductClass.class);
                     product_list.add(product);
+                    numberofProduct.setText(String.valueOf(product_list.size()));
                 }
                 productAdapter.notifyDataSetChanged();
             }
@@ -198,5 +201,6 @@ public class HomeFragment extends Fragment {
         product_databaseReference = firebaseDatabase.getReference("product");
         search_editText = view.findViewById(R.id.search_editText);
         avatar_button = view.findViewById(R.id.avatar_button);
+        numberofProduct = view.findViewById(R.id.numberofProduct);
     }
 }
