@@ -14,11 +14,14 @@ import com.bumptech.glide.Glide;
 import com.example.soeapplication.ProductClass;
 import com.example.soeapplication.R;
 
+import java.io.Serializable;
+
 public class ProductDetail extends AppCompatActivity {
     TextView productName, productCost, productInfo, productSeller;
     ImageView productImage;
     ImageButton backButton;
     Button addtoCart, buyProduct;
+    ProductClass product;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +30,7 @@ public class ProductDetail extends AppCompatActivity {
 
         AnhXa();
 
-        ProductClass product = (ProductClass) getIntent().getSerializableExtra("product");
+        product = (ProductClass) getIntent().getSerializableExtra("product");
         if(product != null){
             Glide.with(this).load(product.getImageUrl()).into(productImage);
             productName.setText(product.getName());
@@ -50,6 +53,7 @@ public class ProductDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(ProductDetail.this, BuyProduct.class);
+                i.putExtra("product", (Serializable) product);
                 startActivity(i);
             }
         });

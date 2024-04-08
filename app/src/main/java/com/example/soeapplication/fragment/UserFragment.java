@@ -51,35 +51,36 @@ public class UserFragment extends Fragment {
         });
 
 
-                helpButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // Tạo một AlertDialog chứa các liên kết đến Facebook và Instagram
-                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                        builder.setTitle("Trợ giúp và hỗ trợ")
-                                .setMessage("Liên kết đến trang Facebook và Instagram:")
-                                .setPositiveButton("Facebook", (dialog, which) -> {
-                                    // Mở liên kết đến trang Facebook
-                                    openLink("https://www.facebook.com/hyeng.laz/?locale=vi_VN");
-                                })
-                                .setNegativeButton("Instagram", (dialog, which) -> {
-                                    // Mở liên kết đến trang Instagram
-                                    openLink("https://www.instagram.com/https://www.instagram.com/_huogw.lmaz/");
-                                })
-                                .setNeutralButton("Hủy", (dialog, which) -> {
-                                    // Đóng AlertDialog nếu người dùng chọn hủy
-                                    dialog.dismiss();
-                                })
-                                .show();
-                    }
-                });
+        helpButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Tạo một AlertDialog chứa các liên kết đến Facebook và Instagram
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setTitle("Trợ giúp và hỗ trợ")
+                        .setMessage("Liên kết đến trang Facebook và Instagram:")
+                        .setPositiveButton("Facebook", (dialog, which) -> {
+                            // Mở liên kết đến trang Facebook
+                            openLink("https://www.facebook.com/hyeng.laz/?locale=vi_VN");
+                        })
+                        .setNegativeButton("Instagram", (dialog, which) -> {
+                            // Mở liên kết đến trang Instagram
+                            openLink("https://www.instagram.com/_huogw.lmaz?igsh=MXN1Ym5wNWw1N2RjMw==");
 
-                return view;
+                        })
+                        .setNeutralButton("Hủy", (dialog, which) -> {
+                            // Đóng AlertDialog nếu người dùng chọn hủy
+                            dialog.dismiss();
+                        })
+                        .show();
             }
+        });
 
-            // Phương thức để mở liên kết bằng trình duyệt
-            private void openLink(String url) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                startActivity(intent);
-            }
-        }
+        return view;
+    }
+
+    // Phương thức để mở liên kết bằng trình duyệt
+    private void openLink(String url) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(intent);
+    }
+}
