@@ -47,18 +47,6 @@ public class UserFragment extends Fragment {
                 startActivity(intent);
             }
         });
-
-        Button logoutButton = view.findViewById(R.id.button_info);
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(getActivity(), Login.class);
-                startActivity(intent);
-                getActivity().finish();
-            }
-        });
-
         return view;
     }
 
