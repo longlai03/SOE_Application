@@ -1,6 +1,8 @@
 package com.example.soeapplication.fragment;
 
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +29,7 @@ public class UserFragment extends Fragment {
 
         Button infoButton = view.findViewById(R.id.button_info);
         Button accountButton = view.findViewById(R.id.button_setting);
-
+        Button helpButton = view.findViewById(R.id.button_help);
 
         infoButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,7 +49,37 @@ public class UserFragment extends Fragment {
                 startActivity(intent);
             }
         });
-        return view;
-    }
 
-}
+
+                helpButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // Tạo một AlertDialog chứa các liên kết đến Facebook và Instagram
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                        builder.setTitle("Trợ giúp và hỗ trợ")
+                                .setMessage("Liên kết đến trang Facebook và Instagram:")
+                                .setPositiveButton("Facebook", (dialog, which) -> {
+                                    // Mở liên kết đến trang Facebook
+                                    openLink("https://www.facebook.com/hyeng.laz/?locale=vi_VN");
+                                })
+                                .setNegativeButton("Instagram", (dialog, which) -> {
+                                    // Mở liên kết đến trang Instagram
+                                    openLink("https://www.instagram.com/https://www.instagram.com/_huogw.lmaz/");
+                                })
+                                .setNeutralButton("Hủy", (dialog, which) -> {
+                                    // Đóng AlertDialog nếu người dùng chọn hủy
+                                    dialog.dismiss();
+                                })
+                                .show();
+                    }
+                });
+
+                return view;
+            }
+
+            // Phương thức để mở liên kết bằng trình duyệt
+            private void openLink(String url) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                startActivity(intent);
+            }
+        }
