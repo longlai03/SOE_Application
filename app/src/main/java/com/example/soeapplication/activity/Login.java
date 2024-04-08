@@ -1,5 +1,6 @@
 package com.example.soeapplication.activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -105,6 +106,9 @@ public class Login extends AppCompatActivity {
         return flag;
     }
     private void DangNhap(){
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Đang đăng nhập...");
+        progressDialog.show();
         String username = Username.getText().toString().trim();
         String password = Password.getText().toString().trim();
         mAuth.signInWithEmailAndPassword(username, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -115,10 +119,12 @@ public class Login extends AppCompatActivity {
                     Intent resultIntent = new Intent();
                     resultIntent.putExtra("firebaseUser", mUser);
                     setResult(RESULT_OK, resultIntent);
+                    progressDialog.dismiss();
                     finish();
                 }
                 else{
                     UsernameLayout.setError("Nhập sai tài khoản hoặc mật khẩu");
+                    progressDialog.dismiss();
                 }
             }
         });

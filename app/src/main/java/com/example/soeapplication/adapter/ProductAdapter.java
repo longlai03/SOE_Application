@@ -37,9 +37,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
         ProductClass product = productList.get(position);
 
         Glide.with(context).load(product.getImageUrl()).into(holder.Product_image);
-        holder.Product_title.setText(product.getName());
+        holder.Product_title.setText(product.getShortName());
         holder.Product_info.setText(product.getShortInfomation());
         holder.Product_cost.setText(product.getCost());
+        product.getUsernameFromUserUid(product.getUseruid(), new ProductClass.OnUsernameListener() {
+            @Override
+            public void onUsernameReceived(String username) {
+                holder.Product_user.setText(username);
+            }
+        });
     }
 
     @Override
@@ -52,12 +58,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView Product_image;
-        TextView Product_title, Product_info, Product_cost;
+        TextView Product_title, Product_info, Product_cost, Product_user;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             Product_image = itemView.findViewById(R.id.product_imageView);
             Product_title = itemView.findViewById(R.id.product_title);
+            Product_user = itemView.findViewById(R.id.product_user);
             Product_info = itemView.findViewById(R.id.product_info);
             Product_cost = itemView.findViewById(R.id.product_cost);
         }

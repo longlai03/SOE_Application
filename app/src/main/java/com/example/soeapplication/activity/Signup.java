@@ -1,6 +1,7 @@
 package com.example.soeapplication.activity;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -165,6 +166,9 @@ public class Signup extends AppCompatActivity {
     }
 
     private void DangKy() {
+        ProgressDialog progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Đang đăng ký...");
+        progressDialog.show();
         String name = Name.getText().toString().trim();
         String username = Address.getText().toString().trim();
         String password = Password.getText().toString().trim();
@@ -176,13 +180,16 @@ public class Signup extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     mUser = mAuth.getCurrentUser();
+                    progressDialog.dismiss();
                     Toast t = Toast.makeText(Signup.this, "Đăng ký thành công", Toast.LENGTH_SHORT);
                     t.show();
                     setDatabase(mUser, sex, name);
                     finish();
                 } else {
+                    progressDialog.dismiss();
                     Log.e("this", "Message: " + task.getException());
                     UsernameLayout.setError("Tài khoản này đã tồn tại");
+
                 }
             }
         });

@@ -1,9 +1,17 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.SOEApplication" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+         <item name="colorPrimary">#0D5FAB</item>
+        <item name="colorPrimaryVariant">#0D5FAB</item>
+
     </style>
+    <style name="fab_add_button">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
 
     <style name="Theme.SOEApplication" parent="Base.Theme.SOEApplication" />
 </resources>
