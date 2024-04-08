@@ -1,6 +1,8 @@
 package com.example.soeapplication.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.soeapplication.ProductClass;
 import com.example.soeapplication.R;
+import com.example.soeapplication.activity.ProductDetail;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHolder> {
@@ -44,6 +48,16 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
             @Override
             public void onUsernameReceived(String username) {
                 holder.Product_user.setText(username);
+            }
+        });
+
+        holder.Product_image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ProductClass clickProduct = productList.get(holder.getAdapterPosition());
+                Intent i = new Intent(context, ProductDetail.class);
+                i.putExtra("product", (Serializable) clickProduct);
+                context.startActivity(i);
             }
         });
     }

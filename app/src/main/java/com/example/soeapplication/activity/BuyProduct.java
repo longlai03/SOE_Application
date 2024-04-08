@@ -6,11 +6,11 @@ import android.os.Bundle;
 
 import com.example.soeapplication.R;
 
-public class PayProduct extends AppCompatActivity {
+public class BuyProduct extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pay_product);
+        setContentView(R.layout.activity_buy_product);
     }
 }

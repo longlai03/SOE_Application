@@ -26,7 +26,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
-                    app:srcCompat="@android:drawable/ic_media_rew"
+                    app:srcCompat="@drawable/baseline_arrow_back_ios_new_24"
                     tools:src="@tools:sample/avatars" />
 
                 <TextView
@@ -183,7 +183,7 @@
                 android:background="@drawable/greyybackground">
 
                 <ImageView
-                    android:id="@+id/imageView8"
+                    android:id="@+id/imageView9"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginTop="16dp"
@@ -288,8 +288,7 @@
                 style="@android:style/Widget.Button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="32dp
-"
+                android:layout_marginTop="32dp"
                 android:background="@color/bold_blue"
                 android:text="OrderNow"
                 android:textColor="@color/white"

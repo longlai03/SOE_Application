@@ -18,7 +18,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imageView4"
@@ -53,18 +53,20 @@
                 android:id="@+id/emailTextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:boxBackgroundColor="#F3F3F3"
+                app:boxStrokeColor="#2196F3"
+                app:cursorColor="#0D5FAB"
+                app:hintTextColor="#2196F3"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginEnd="20dp"
-
-
-                app:hint="Địa chỉ email">
+                android:layout_marginEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"/>
+                    android:inputType="textEmailAddress"
+                    android:hint="Tài khoản" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -73,17 +75,21 @@
                 android:id="@+id/passwordTextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:boxBackgroundColor="#F3F3F3"
+                app:boxStrokeColor="#2196F3"
+                app:cursorColor="#0D5FAB"
+                app:hintTextColor="#2196F3"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="20dp"
-                app:hint="Password"
                 app:endIconMode="password_toggle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputEditText2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"/>
+                    android:inputType="textPassword"
+                    android:hint="Mật khẩu"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -91,8 +97,8 @@
                 android:id="@+id/textView23"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="200dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_weight="1"
                 android:text="Quên mật khẩu"
                 android:textColor="@color/bold_blue"
@@ -128,32 +134,23 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/view" />
 
-            <TextView
-                android:id="@+id/textView25"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:layout_marginTop="1dp"
-                android:text="Địa chỉ"
-                android:textSize="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView24"
-                app:layout_constraintVertical_bias="0.105" />
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/addressTextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:boxBackgroundColor="#F3F3F3"
+                app:boxStrokeColor="#2196F3"
+                app:cursorColor="#0D5FAB"
+                app:hintTextColor="#2196F3"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginEnd="20dp"
-                app:hint="Thành phố/ Tỉnh">
+                android:layout_marginEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputEditText3"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:hint="Thành phố/ Tỉnh"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -161,15 +158,19 @@
                 android:id="@+id/wardTextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:boxBackgroundColor="#F3F3F3"
+                app:boxStrokeColor="#2196F3"
+                app:cursorColor="#0D5FAB"
+                app:hintTextColor="#2196F3"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginEnd="20dp"
-                app:hint="Phường/Xã">
+                android:layout_marginEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputEditText4"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:hint="Phường/Xã"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -177,15 +178,19 @@
                 android:id="@+id/streetTextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:boxBackgroundColor="#F3F3F3"
+                app:boxStrokeColor="#2196F3"
+                app:cursorColor="#0D5FAB"
+                app:hintTextColor="#2196F3"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="15dp"
-                android:layout_marginEnd="20dp"
-                app:hint="Số Nhà/ Đường/Phố">
+                android:layout_marginEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/textInputEditText5"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:hint="Số Nhà/ Đường/Phố"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -236,15 +241,19 @@
                     android:id="@+id/accountNumberTextInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:boxBackgroundColor="#F3F3F3"
+                    app:boxStrokeColor="#2196F3"
+                    app:cursorColor="#0D5FAB"
+                    app:hintTextColor="#2196F3"
                     android:layout_marginStart="40dp"
                     android:layout_marginTop="15dp"
-                    android:layout_marginEnd="20dp"
-                    app:hint="Nhập số tài khoản">
+                    android:layout_marginEnd="20dp">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/textInputEditText6"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:hint="Nhập số tài khoản"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 

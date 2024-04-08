@@ -25,6 +25,7 @@
             tools:layout_editor_absoluteY="10dp">
 
             <ImageButton
+                android:id="@+id/back_button"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_gravity="start"
@@ -64,6 +65,30 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/montserrat_light"
+                android:text="Người bán:"
+                android:textAllCaps="false"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/Product_info" />
+
+            <TextView
+                android:id="@+id/Product_seller"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:fontFamily="@font/montserrat_light"
+                android:text="product_seller"
+                android:textAllCaps="false"
+                android:textColor="@color/bold_blue"
+                app:layout_constraintStart_toEndOf="@+id/textView20"
+                app:layout_constraintTop_toTopOf="@+id/textView20" />
 
             <ImageView
                 android:id="@+id/product_image"
@@ -110,7 +135,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/montserrat_light"
                 android:text="Chi tiết sản phẩm"
                 android:textAllCaps="false"
@@ -131,31 +156,31 @@
 
             <Button
                 android:id="@+id/addtoCart_button"
-                android:layout_width="180dp"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="20dp"
+                android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="5dp"
+                android:layout_marginEnd="2dp"
                 android:fontFamily="@font/montserrat_light"
                 android:text="Thêm vào giỏ"
-                app:cornerRadius="10dp"
+                app:cornerRadius="5dp"
                 app:layout_constraintEnd_toStartOf="@+id/buy_button"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Product_info" />
+                app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
             <Button
                 android:id="@+id/buy_button"
-                android:layout_width="180dp"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
+                android:layout_marginStart="2dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
+                android:layout_marginEnd="10dp"
                 android:fontFamily="@font/montserrat_light"
                 android:text="Mua ngay"
-                app:cornerRadius="10dp"
+                app:cornerRadius="5dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/addtoCart_button"
-                app:layout_constraintTop_toBottomOf="@+id/Product_info" />
+                app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
             <TextView
                 android:id="@+id/textView19"

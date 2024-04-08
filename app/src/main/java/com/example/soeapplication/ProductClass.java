@@ -10,7 +10,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class ProductClass {
+import java.io.Serializable;
+
+public class ProductClass implements Serializable {
     String useruid ,name, infomation, cost, imageUrl, product_id;
 
     public ProductClass() {
