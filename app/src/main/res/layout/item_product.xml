@@ -51,10 +51,10 @@
             android:background="@android:color/transparent"
             android:scaleType="centerCrop"
             android:src="@drawable/baseline_add_shopping_cart_24"
-            android:tint="@color/bold_blue"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            tools:src="@drawable/baseline_add_shopping_cart_24" />
+            tools:src="@drawable/baseline_add_shopping_cart_24"
+            app:tint="@color/bold_blue" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/detail_constraint"

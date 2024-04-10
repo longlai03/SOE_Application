@@ -13,8 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.soeapplication.R;
 import com.example.soeapplication.activity.Account;
-import com.example.soeapplication.activity.Login;
-import com.example.soeapplication.activity.Myprofile;
+import com.example.soeapplication.activity.MyProfile;
 
 public class UserFragment extends Fragment {
 
@@ -35,7 +34,7 @@ public class UserFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // Tạo Intent để mở Myprofile activity
-                Intent intent = new Intent(getActivity(), Myprofile.class);
+                Intent intent = new Intent(getActivity(), MyProfile.class);
                 startActivity(intent);
             }
         });

@@ -9,7 +9,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.soeapplication.R;
@@ -140,7 +139,7 @@ public class MyProfile extends AppCompatActivity {
         countryLayoutEditText = findViewById(R.id.countryTextInputLayout);
         districtLayoutEditText = findViewById(R.id.districtTextInputLayout);
         streetLayoutEditText = findViewById(R.id.streetTextInputLayout);
-        updateButton = findViewById(R.id.updateUserinfo_button);
+        updateButton = findViewById(R.id.update_button);
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
         user_database = FirebaseDatabase.getInstance();

@@ -16,7 +16,7 @@ import com.example.soeapplication.ProductClass;
 import com.example.soeapplication.R;
 
 public class BuyProduct extends AppCompatActivity {
-    TextView productTitle, productShortInfo, DateOrder, productCost, voucherCost, deliveryCost, totalCost, totalCost2, tvplus, tvminus;
+    TextView productTitle, productSeller, DateOrder, productCost, voucherCost, deliveryCost, totalCost, totalCost2, tvplus, tvminus;
     Button buyProduct;
     ImageButton backbutton;
     ImageView productImage;
@@ -29,17 +29,17 @@ public class BuyProduct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_buy_product);
 
-        AnhXa();
+//        AnhXa();
 
-        product = (ProductClass) getIntent().getSerializableExtra("product");
-        if (product != null) {
-            Glide.with(this).load(product.getImageUrl()).into(productImage);
-            productTitle.setText(product.getName());
-            productShortInfo.setText(product.getShortInfomation());
-            productCost.setText(product.getCost());
-            voucherCost.setText("0");
-            deliveryCost.setText("0");
-        }
+//        product = (ProductClass) getIntent().getSerializableExtra("product");
+//        if (product != null) {
+////            Glide.with(this).load(product.getImageUrl()).into(productImage);
+////            productTitle.setText(product.getName());
+////            productShortInfo.setText(product.getShortInfomation());
+////            productCost.setText(product.getCost());
+////            voucherCost.setText("0");
+////            deliveryCost.setText("0");
+//        }
 
         backbutton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -47,57 +47,57 @@ public class BuyProduct extends AppCompatActivity {
                 finish();
             }
         });
-        tvplus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (TextUtils.isDigitsOnly(productCost.getText().toString())) {
-                    String currentQuantity = productQuantity.getText().toString();
-
-                    if (TextUtils.isDigitsOnly(currentQuantity)) {
-                        int quantity = Integer.parseInt(currentQuantity);
-                        quantity++;
-                        if (quantity > 100) {
-                            quantity = 0;
-                        }
-                        productQuantity.setText(String.valueOf(quantity));
-                        totalCost.setText(String.valueOf(GiaSanPham(productCost,voucherCost,deliveryCost,productQuantity)));
-                        totalCost2.setText(String.valueOf(GiaSanPham(productCost,voucherCost,deliveryCost,productQuantity)));
-                    } else {
-                        productQuantity.setText("0");
-                        totalCost.setText(String.valueOf(GiaSanPham(productCost,voucherCost,deliveryCost,productQuantity)));
-                        totalCost2.setText(String.valueOf(GiaSanPham(productCost,voucherCost,deliveryCost,productQuantity)));
-                    }
-                }
-            }
-        });
-        tvminus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (TextUtils.isDigitsOnly(productCost.getText().toString())) {
-                    String currentQuantity = productQuantity.getText().toString();
-
-                    if (TextUtils.isDigitsOnly(currentQuantity)) {
-                        int quantity = Integer.parseInt(currentQuantity);
-                        quantity--;
-                        if (quantity < 0) {
-                            quantity = 0;
-                        }
-                        productQuantity.setText(String.valueOf(quantity));
-                        totalCost.setText(String.valueOf(GiaSanPham(productCost,voucherCost,deliveryCost,productQuantity)));
-                        totalCost2.setText(String.valueOf(GiaSanPham(productCost,voucherCost,deliveryCost,productQuantity)));
-                    } else {
-                        productQuantity.setText("0");
-                        totalCost.setText(String.valueOf(GiaSanPham(productCost,voucherCost,deliveryCost,productQuantity)));
-                        totalCost2.setText(String.valueOf(GiaSanPham(productCost,voucherCost,deliveryCost,productQuantity)));
-                    }
-                }
-            }
-        });
+//        tvplus.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (TextUtils.isDigitsOnly(productCost.getText().toString())) {
+//                    String currentQuantity = productQuantity.getText().toString();
+//
+//                    if (TextUtils.isDigitsOnly(currentQuantity)) {
+//                        int quantity = Integer.parseInt(currentQuantity);
+//                        quantity++;
+//                        if (quantity > 100) {
+//                            quantity = 0;
+//                        }
+//                        productQuantity.setText(String.valueOf(quantity));
+//                        totalCost.setText(String.valueOf(GiaSanPham(productCost,voucherCost,deliveryCost,productQuantity)));
+//                        totalCost2.setText(String.valueOf(GiaSanPham(productCost,voucherCost,deliveryCost,productQuantity)));
+//                    } else {
+//                        productQuantity.setText("0");
+//                        totalCost.setText(String.valueOf(GiaSanPham(productCost,voucherCost,deliveryCost,productQuantity)));
+//                        totalCost2.setText(String.valueOf(GiaSanPham(productCost,voucherCost,deliveryCost,productQuantity)));
+//                    }
+//                }
+//            }
+//        });
+//        tvminus.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (TextUtils.isDigitsOnly(productCost.getText().toString())) {
+//                    String currentQuantity = productQuantity.getText().toString();
+//
+//                    if (TextUtils.isDigitsOnly(currentQuantity)) {
+//                        int quantity = Integer.parseInt(currentQuantity);
+//                        quantity--;
+//                        if (quantity < 0) {
+//                            quantity = 0;
+//                        }
+//                        productQuantity.setText(String.valueOf(quantity));
+//                        totalCost.setText(String.valueOf(GiaSanPham(productCost,voucherCost,deliveryCost,productQuantity)));
+//                        totalCost2.setText(String.valueOf(GiaSanPham(productCost,voucherCost,deliveryCost,productQuantity)));
+//                    } else {
+//                        productQuantity.setText("0");
+//                        totalCost.setText(String.valueOf(GiaSanPham(productCost,voucherCost,deliveryCost,productQuantity)));
+//                        totalCost2.setText(String.valueOf(GiaSanPham(productCost,voucherCost,deliveryCost,productQuantity)));
+//                    }
+//                }
+//            }
+//        });
     }
 
     private void AnhXa() {
         productTitle = findViewById(R.id.Product_title);
-        productShortInfo = findViewById(R.id.Product_shortinfo);
+        productSeller = findViewById(R.id.Product_seller);
         productImage = findViewById(R.id.buy_product_image);
         DateOrder = findViewById(R.id.dateoforder);
         productCost = findViewById(R.id.product_cost);

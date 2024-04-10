@@ -1,13 +1,31 @@
 package com.example.soeapplication.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.soeapplication.CartProductClass;
+import com.example.soeapplication.ProductClass;
 import com.example.soeapplication.R;
+import com.example.soeapplication.adapter.CartAdapter;
+import com.example.soeapplication.adapter.ProductAdapter;
+import com.google.firebase.Firebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,11 +73,57 @@ public class CartFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+    private RecyclerView cartRecycleview;
+    private CartAdapter cartAdapter;
+    private ArrayList<CartProductClass> cartProduct_list;
+    private FirebaseAuth mAuth;
+    private FirebaseUser mUser;
+    private FirebaseDatabase cart_database;
+    private DatabaseReference cart_databaseReference;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cart, container, false);
+        View view = inflater.inflate(R.layout.fragment_cart, container, false);
+        AnhXa(view);
+        cartProduct_list = new ArrayList<>();
+        cartAdapter = new CartAdapter(getActivity(), cartProduct_list);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 1);
+        cartRecycleview.setLayoutManager(gridLayoutManager);
+        cartRecycleview.setAdapter(cartAdapter);
+        getProduct_list();
+        return view;
     }
+    private void AnhXa(View view){
+        cartRecycleview = view.findViewById(R.id.cart_recyclerView);
+        mAuth = FirebaseAuth.getInstance();
+        mUser = mAuth.getCurrentUser();
+        cart_database = FirebaseDatabase.getInstance();
+        cart_databaseReference = cart_database.getReference("cart").child(mUser.getUid());
+    }
+    private void getProduct_list() {
+        //Them danh sach vao day
+        cart_databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (cartProduct_list != null) {
+                    cartProduct_list.clear();
+                }
+                for (DataSnapshot productSnapshot : snapshot.getChildren()) {
+                    CartProductClass cartProduct = productSnapshot.getValue(CartProductClass.class);
+                    cartProduct_list.add(cartProduct);
+                }
+                cartAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("FirebaseError", "Error reading data: " + error.getMessage());
+            }
+        });
+    }
+
 }
