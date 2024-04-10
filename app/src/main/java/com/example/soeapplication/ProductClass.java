@@ -13,12 +13,30 @@ import com.google.firebase.database.ValueEventListener;
 import java.io.Serializable;
 
 public class ProductClass implements Serializable {
-    String useruid ,name, infomation, cost, imageUrl, product_id;
+    String useruid ,name, infomation, cost, imageUrl, product_id, product_quantity;
 
     public ProductClass() {
     }
     public interface UsernameCallback {
         void onUsernameReceived(String username);
+    }
+
+    public ProductClass(String useruid, String name, String infomation, String cost, String imageUrl, String product_id, String product_quantity) {
+        this.useruid = useruid;
+        this.name = name;
+        this.infomation = infomation;
+        this.cost = cost;
+        this.imageUrl = imageUrl;
+        this.product_id = product_id;
+        this.product_quantity = product_quantity;
+    }
+
+    public String getProduct_quantity() {
+        return product_quantity;
+    }
+
+    public void setProduct_quantity(String product_quantity) {
+        this.product_quantity = product_quantity;
     }
 
     public ProductClass(String useruid, String name, String infomation, String cost, String imageUrl, String product_id) {

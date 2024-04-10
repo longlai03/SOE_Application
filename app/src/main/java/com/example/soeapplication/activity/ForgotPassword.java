@@ -51,7 +51,6 @@ public class ForgotPassword extends AppCompatActivity {
         String email = email_editText.getText().toString();
 
         mAuth = FirebaseAuth.getInstance();
-//        mAuth.verifyPasswordResetCode()
         mAuth.sendPasswordResetEmail(email).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {

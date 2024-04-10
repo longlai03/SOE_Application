@@ -1,13 +1,33 @@
 package com.example.soeapplication;
 
-public class UserClass {
-    String mUserId, sex, name, email;
+import java.io.Serializable;
 
-    public UserClass(String mUserId, String sex, String name, String email) {
+public class UserClass implements Serializable {
+    String mUserId, sex, name, email, address, balance;
+
+    public UserClass(String mUserId, String sex, String name, String email, String address, String balance) {
         this.mUserId = mUserId;
         this.sex = sex;
         this.name = name;
         this.email = email;
+        this.address = address;
+        this.balance = balance;
+    }
+
+    public String getBalance() {
+        return balance;
+    }
+
+    public void setBalance(String balance) {
+        this.balance = balance;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getEmail() {

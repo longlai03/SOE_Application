@@ -67,138 +67,12 @@
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_buy">
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="100dp"
-            android:layout_height="140dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:scaleType="centerCrop"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
-
-        <TextView
-            android:id="@+id/tvminus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_marginBottom="12dp"
-            android:text=" - "
-            android:textColor="@color/bold_blue"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/textView31"
-            app:layout_constraintStart_toEndOf="@+id/amount" />
-
-        <TextView
-            android:id="@+id/tvplus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="2dp"
-            android:layout_marginBottom="12dp"
-            android:text=" + "
-            android:textColor="@color/bold_blue"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/dateoforder"
-            app:layout_constraintEnd_toStartOf="@+id/amount"
-            app:layout_constraintStart_toEndOf="@+id/textView29" />
-
-        <EditText
-            android:id="@+id/amount"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="2dp"
-            android:layout_marginEnd="2dp"
-            android:layout_marginBottom="10dp"
-            android:background="#c2c2c2"
-            android:enabled="false"
-            android:fontFamily="@font/montserrat_light"
-            android:inputType="number"
-            android:text="99"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="normal"
-            app:layout_constraintBottom_toTopOf="@+id/textView31"
-            app:layout_constraintEnd_toStartOf="@+id/tvminus"
-            app:layout_constraintStart_toEndOf="@+id/tvplus" />
-
-        <TextView
-            android:id="@+id/Product_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="Product_title"
-            android:textSize="16sp"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toTopOf="@+id/imageView2" />
-
-        <TextView
-            android:id="@+id/Product_shortinfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/montserrat_light"
-            android:text="Product_shortinfo"
-            android:textSize="12sp"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
-            app:layout_constraintTop_toBottomOf="@+id/Product_title" />
-
-        <TextView
-            android:id="@+id/textView29"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginBottom="16dp"
-            android:fontFamily="@font/montserrat_light"
-            android:text="Số lượng"
-            app:layout_constraintBottom_toTopOf="@+id/textView31"
-            app:layout_constraintStart_toEndOf="@+id/imageView2" />
-
-        <TextView
-            android:id="@+id/textView31"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="2dp"
-            android:fontFamily="@font/montserrat_light"
-            android:text="Ngày mua:"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/dateoforder"
-            app:layout_constraintStart_toEndOf="@+id/imageView2" />
-
-        <TextView
-            android:id="@+id/dateoforder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:fontFamily="@font/montserrat_light"
-            android:text="date of order"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView31" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout3"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/cardView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageView
             android:id="@+id/voucher_icon"
@@ -230,6 +104,7 @@
             android:fontFamily="@font/montserrat_bold"
             android:text="Voucher"
             android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/voucher_icon"
             app:layout_constraintStart_toEndOf="@+id/voucher_icon"
             app:layout_constraintTop_toTopOf="@+id/voucher_icon" />
 
@@ -261,57 +136,61 @@
             android:id="@+id/product_cost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="2dp"
             android:fontFamily="@font/montserrat_bold"
             android:text="product_cost"
             android:textColor="@color/bold_blue"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/textView33"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView33" />
+            app:layout_constraintEnd_toStartOf="@+id/textView28"
+            app:layout_constraintTop_toTopOf="@+id/textView33"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/total_cost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="2dp"
             android:fontFamily="@font/montserrat_bold"
             android:text="total_cost"
             android:textColor="@color/bold_blue"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/textView36"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView36" />
+            app:layout_constraintEnd_toStartOf="@+id/textView39"
+            app:layout_constraintTop_toTopOf="@+id/textView36"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/voucher_cost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="2dp"
             android:fontFamily="@font/montserrat_bold"
             android:text="voucher_cost"
             android:textColor="@color/bold_blue"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/textView34"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView34" />
+            app:layout_constraintEnd_toStartOf="@+id/textView37"
+            app:layout_constraintTop_toTopOf="@+id/textView34"
+            app:layout_constraintVertical_bias="0.0" />
 
         <TextView
             android:id="@+id/delivery_cost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="2dp"
             android:fontFamily="@font/montserrat_bold"
             android:text="delivery_cost"
             android:textColor="@color/bold_blue"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/textView35"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textView35" />
+            app:layout_constraintEnd_toStartOf="@+id/textView38"
+            app:layout_constraintTop_toTopOf="@+id/textView35"
+            app:layout_constraintVertical_bias="1.0" />
 
         <TextView
             android:id="@+id/textView33"
@@ -375,9 +254,59 @@
             android:layout_height="match_parent">
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="đ"
+            android:textColor="@color/bold_blue"
+            app:layout_constraintBottom_toBottomOf="@+id/product_cost"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/product_cost" />
+
+        <TextView
+            android:id="@+id/textView37"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="đ"
+            android:textColor="@color/bold_blue"
+            app:layout_constraintBottom_toBottomOf="@+id/voucher_cost"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/voucher_cost" />
+
+        <TextView
+            android:id="@+id/textView38"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="đ"
+            android:textColor="@color/bold_blue"
+            app:layout_constraintBottom_toBottomOf="@+id/delivery_cost"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/delivery_cost" />
+
+        <TextView
+            android:id="@+id/textView39"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="đ"
+            android:textColor="@color/bold_blue"
+            app:layout_constraintBottom_toBottomOf="@+id/total_cost"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/total_cost" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="-10dp"
@@ -418,7 +347,29 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView40"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="đ"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/total_cost_2"
+                app:layout_constraintStart_toEndOf="@+id/total_cost_2"
+                app:layout_constraintTop_toTopOf="@+id/total_cost_2" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_buy" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
