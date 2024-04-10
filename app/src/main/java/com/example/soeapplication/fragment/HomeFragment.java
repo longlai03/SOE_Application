@@ -103,6 +103,7 @@ public class HomeFragment extends Fragment {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         product_recycleview.setLayoutManager(gridLayoutManager);
         product_recycleview.setAdapter(productAdapter);
+        getProduct_list();
 
         addProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -133,7 +134,7 @@ public class HomeFragment extends Fragment {
 
             }
         });
-        getProduct_list();
+
         avatar_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

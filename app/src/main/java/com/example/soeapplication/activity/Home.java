@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -12,16 +13,23 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.example.soeapplication.R;
+import com.example.soeapplication.UserClass;
 import com.example.soeapplication.adapter.ViewPagerAdapter;
+import com.example.soeapplication.fragment.UserFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class Home extends AppCompatActivity {
 
@@ -37,12 +45,14 @@ public class Home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         UIValue();
+
         ViewPagerAdapter view_adapter = new ViewPagerAdapter(Home.this);
         viewPager2.setAdapter(view_adapter);
         if (mUser == null) {
             LoginActivity();
+        } else {
+            CallingUpdateUser();
         }
-
         viewPager2.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -52,7 +62,7 @@ public class Home extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                switch (position){
+                switch (position) {
                     case 0:
                         bottomNavigationView.getMenu().findItem(R.id.bottom_home).setChecked(true);
                         break;
@@ -78,22 +88,20 @@ public class Home extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 int id = item.getItemId();
-                if(id == R.id.bottom_home){
+                if (id == R.id.bottom_home) {
                     viewPager2.setCurrentItem(0);
-                }
-                else if(id == R.id.bottom_chat){
+                } else if (id == R.id.bottom_chat) {
                     viewPager2.setCurrentItem(1);
-                }
-                else if(id == R.id.bottom_cart){
+                } else if (id == R.id.bottom_cart) {
                     viewPager2.setCurrentItem(2);
-                }
-                else if(id == R.id.bottom_user){
+                } else if (id == R.id.bottom_user) {
                     viewPager2.setCurrentItem(3);
                 }
                 return true;
             }
         });
     }
+
     private final ActivityResultLauncher<Intent> mActivityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult()
             , new ActivityResultCallback<ActivityResult>() {
                 @Override
@@ -104,6 +112,9 @@ public class Home extends AppCompatActivity {
                         if (intent != null && intent.hasExtra("firebaseUser")) {
                             mUser = intent.getParcelableExtra("firebaseUser");
                             Log.e("This", "mUser = " + mUser.getEmail());
+                            if (mUser != null) {
+                                CallingUpdateUser();
+                            }
                         }
                     } else {
                         finish();
@@ -116,6 +127,30 @@ public class Home extends AppCompatActivity {
         mActivityResultLauncher.launch(i);
     }
 
+    private void CallingUpdateUser() {
+        User_Database = FirebaseDatabase.getInstance();
+        User_reference = User_Database.getReference("user");
+        if (mUser != null) {
+            User_reference.child(mUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.exists()) {
+                        UserClass userClass = snapshot.getValue(UserClass.class);
+                        Log.e("Home", "CallingUpdate");
+                        Log.e("Home", "UserEmail" + userClass.getEmail());
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        } else {
+            Toast.makeText(this,"Nguoi dung chua dang nhap!",Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void UIValue() {
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
@@ -123,15 +158,13 @@ public class Home extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottom_navigation);
     }
 
-
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.e("this", "mUser: "+ mUser);
-        mAuth.signOut();
-        if(mUser != null) {
-            mUser = null;
-        }
-        Log.e("this", "mUser: "+ mUser);
+    protected void onResume() {
+        super.onResume();
+        Log.e("Home", "CallingResume");
+        Log.e("Home", "mUser = " + mUser.getEmail());
+        mAuth = FirebaseAuth.getInstance();
+        mUser = mAuth.getCurrentUser();
+        CallingUpdateUser();
     }
 }

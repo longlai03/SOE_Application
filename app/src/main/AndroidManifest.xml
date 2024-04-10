@@ -19,7 +19,7 @@
             android:name=".activity.Account"
             android:exported="false" />
         <activity
-            android:name=".activity.Myprofile"
+            android:name=".activity.MyProfile"
             android:exported="false" />
         <activity
             android:name=".activity.ProductDetail"

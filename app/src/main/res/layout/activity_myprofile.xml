@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.Myprofile">
+    tools:context=".activity.MyProfile">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -62,11 +62,12 @@
                 android:layout_marginEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditText"
+                    android:id="@+id/emailEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:hint="Tài khoản" />
+                    android:enabled="false"
+                    android:hint="Tài khoản"
+                    android:inputType="textEmailAddress" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -85,11 +86,12 @@
                 app:endIconMode="password_toggle">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditText2"
+                    android:id="@+id/passwordEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:hint="Mật khẩu"/>
+                    android:enabled="false"
+                    android:hint="Mật khẩu"
+                    android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -98,7 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 android:layout_weight="1"
                 android:text="Quên mật khẩu"
                 android:textColor="@color/bold_blue"
@@ -106,7 +108,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputEditText2" />
+                app:layout_constraintTop_toBottomOf="@+id/passwordEditText" />
 
             <View
                 android:id="@+id/view"
@@ -135,7 +137,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/view" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/addressTextInputLayout"
+                android:id="@+id/countryTextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:boxBackgroundColor="#F3F3F3"
@@ -147,7 +149,7 @@
                 android:layout_marginEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditText3"
+                    android:id="@+id/countryEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Thành phố/ Tỉnh"/>
@@ -155,7 +157,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/wardTextInputLayout"
+                android:id="@+id/districtTextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:boxBackgroundColor="#F3F3F3"
@@ -167,7 +169,7 @@
                 android:layout_marginEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditText4"
+                    android:id="@+id/districtEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Phường/Xã"/>
@@ -187,7 +189,7 @@
                 android:layout_marginEnd="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/textInputEditText5"
+                    android:id="@+id/streetEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Số Nhà/ Đường/Phố"/>
@@ -202,75 +204,16 @@
                 android:background="@color/bold_blue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textInputEditText5"
+                app:layout_constraintTop_toBottomOf="@+id/streetEditText"
                 tools:ignore="MissingConstraints" />
 
-            <LinearLayout
+            <Button
+                android:id="@+id/updateUserinfo_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="684dp">
+                android:layout_marginTop="20dp"
+                android:text="Lưu thông tin" />
 
-                <!-- Các TextView và EditText khác -->
-                <TextView
-                    android:id="@+id/textView26"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginTop="15dp"
-                    android:text="TÀI KHOẢN NGÂN HÀNG"
-                    android:textColor="@color/bold_blue"
-                    android:textSize="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/view1" />
-
-                <TextView
-                    android:id="@+id/textView27"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginTop="15dp"
-                    android:text="Số tài khoản"
-                    android:textColor="@color/black"
-                    android:textSize="16dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView26" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/accountNumberTextInputLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:boxBackgroundColor="#F3F3F3"
-                    app:boxStrokeColor="#2196F3"
-                    app:cursorColor="#0D5FAB"
-                    app:hintTextColor="#2196F3"
-                    android:layout_marginStart="40dp"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginEnd="20dp">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/textInputEditText6"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:hint="Nhập số tài khoản"/>
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <Button
-                    android:id="@+id/button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="Lưu thông tin" />
-
-                <Button
-                    android:id="@+id/button1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Sửa thông tin" />
-            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

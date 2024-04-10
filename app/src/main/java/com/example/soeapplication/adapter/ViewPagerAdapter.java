@@ -7,12 +7,14 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.example.soeapplication.UserClass;
 import com.example.soeapplication.fragment.CartFragment;
 import com.example.soeapplication.fragment.ChatFragment;
 import com.example.soeapplication.fragment.HomeFragment;
 import com.example.soeapplication.fragment.UserFragment;
 
 public class ViewPagerAdapter extends FragmentStateAdapter {
+
     public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
@@ -25,21 +27,29 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
         super(fragmentManager, lifecycle);
     }
 
+
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        switch (position){
+        Fragment fragment;
+        switch (position) {
             case 0:
-                return new HomeFragment();
+                fragment = new HomeFragment();
+                break;
             case 1:
-                return new ChatFragment();
+                fragment = new ChatFragment();
+                break;
             case 2:
-                return new CartFragment();
+                fragment = new CartFragment();
+                break;
             case 3:
-                return new UserFragment();
+                fragment = new UserFragment();
+                break;
             default:
-                return new HomeFragment();
+                fragment = new HomeFragment();
+                break;
         }
+        return fragment;
     }
 
     @Override

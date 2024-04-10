@@ -184,6 +184,7 @@ public class Signup extends AppCompatActivity {
                     Toast t = Toast.makeText(Signup.this, "Đăng ký thành công", Toast.LENGTH_SHORT);
                     t.show();
                     setDatabase(mUser, sex, name);
+
                     finish();
                 } else {
                     progressDialog.dismiss();
@@ -199,7 +200,8 @@ public class Signup extends AppCompatActivity {
         Database = FirebaseDatabase.getInstance();
         reference = Database.getReference("user");
 
-        UserClass userClass = new UserClass(user.getUid(), sex, name, user.getEmail());
+        UserClass userClass = new UserClass(user.getUid(), sex, name, user.getEmail(),"","0");
         reference.child(user.getUid()).setValue(userClass);
     }
+
 }
