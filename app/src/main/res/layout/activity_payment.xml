@@ -42,7 +42,7 @@
                 tools:ignore="MissingConstraints" />
 
             <TextView
-                android:id="@+id/textView42"
+                android:id="@+id/textViewsodu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -60,7 +60,7 @@
                 android:background="@color/bold_blue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView42"
+                app:layout_constraintTop_toBottomOf="@+id/textViewsodu"
                 tools:ignore="MissingConstraints" />
 
             <LinearLayout
@@ -81,7 +81,7 @@
                     android:orientation="horizontal">
 
                     <ImageButton
-                        android:id="@+id/imageButton"
+                        android:id="@+id/imageButtonnaptien"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

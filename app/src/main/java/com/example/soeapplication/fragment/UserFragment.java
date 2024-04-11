@@ -18,6 +18,7 @@ import com.example.soeapplication.R;
 import com.example.soeapplication.UserClass;
 import com.example.soeapplication.activity.Account;
 import com.example.soeapplication.activity.MyProfile;
+import com.example.soeapplication.activity.Payment;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -46,6 +47,7 @@ public class UserFragment extends Fragment {
         Button infoButton = view.findViewById(R.id.button_info);
         Button accountButton = view.findViewById(R.id.button_setting);
         Button helpButton = view.findViewById(R.id.button_help);
+        Button bankButton = view.findViewById(R.id.button_bank);
 
         name = view.findViewById(R.id.textView_username);
         email = view.findViewById(R.id.textView_useremail);
@@ -93,6 +95,13 @@ public class UserFragment extends Fragment {
                             dialog.dismiss();
                         })
                         .show();
+            }
+        });
+        bankButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getActivity(), Payment.class);
+                startActivity(i);
             }
         });
 
