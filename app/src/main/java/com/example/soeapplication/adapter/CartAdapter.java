@@ -46,6 +46,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
                 holder.product_seller.setText(username);
             }
         });
+        holder.product_cost.setText(cartProduct.getCost());
         holder.date_of_order.setText(cartProduct.getDate_of_order());
         holder.amount.setText(cartProduct.getProduct_quantity());
     }
@@ -60,7 +61,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView buy_product_image;
-        TextView product_title, product_seller, date_of_order, tvplus, tvminus;
+        TextView product_title, product_seller,product_cost, date_of_order, tvplus, tvminus;
         EditText amount;
 
 
@@ -69,6 +70,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             buy_product_image = itemView.findViewById(R.id.buy_product_image);
             product_title = itemView.findViewById(R.id.Product_title);
             product_seller = itemView.findViewById(R.id.Product_seller);
+            product_cost = itemView.findViewById(R.id.buy_product_cost);
             date_of_order = itemView.findViewById(R.id.dateoforder);
             tvplus = itemView.findViewById(R.id.tvplus);
             tvminus = itemView.findViewById(R.id.tvminus);

@@ -65,8 +65,9 @@
                     android:id="@+id/emailEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:hint="Tài khoản" />
+                    android:enabled="false"
+                    android:hint="Tài khoản"
+                    android:inputType="textEmailAddress" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -75,21 +76,21 @@
                 android:id="@+id/passwordTextInputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:boxBackgroundColor="#F3F3F3"
-                app:boxStrokeColor="#2196F3"
-                app:cursorColor="#0D5FAB"
-                app:hintTextColor="#2196F3"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="20dp"
-                app:endIconMode="password_toggle">
+                app:boxBackgroundColor="#F3F3F3"
+                app:boxStrokeColor="#2196F3"
+                app:cursorColor="#0D5FAB"
+                app:hintTextColor="#2196F3">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/passwordEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    android:hint="Mật khẩu"/>
+                    android:enabled="false"
+                    android:hint="Mật khẩu"
+                    android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

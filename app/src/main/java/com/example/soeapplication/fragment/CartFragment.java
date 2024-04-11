@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -73,6 +75,7 @@ public class CartFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+
     private RecyclerView cartRecycleview;
     private CartAdapter cartAdapter;
     private ArrayList<CartProductClass> cartProduct_list;
@@ -80,6 +83,7 @@ public class CartFragment extends Fragment {
     private FirebaseUser mUser;
     private FirebaseDatabase cart_database;
     private DatabaseReference cart_databaseReference;
+    private TextView total_cost;
 
 
     @Override
@@ -97,33 +101,57 @@ public class CartFragment extends Fragment {
         getProduct_list();
         return view;
     }
-    private void AnhXa(View view){
+
+    private void AnhXa(View view) {
         cartRecycleview = view.findViewById(R.id.cart_recyclerView);
+        total_cost = view.findViewById(R.id.total_product_cost);
+    }
+
+    private void getProduct_list() {
+        //Lay tai khoan
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
-        cart_database = FirebaseDatabase.getInstance();
-        cart_databaseReference = cart_database.getReference("cart").child(mUser.getUid());
-    }
-    private void getProduct_list() {
-        //Them danh sach vao day
-        cart_databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (cartProduct_list != null) {
-                    cartProduct_list.clear();
-                }
-                for (DataSnapshot productSnapshot : snapshot.getChildren()) {
-                    CartProductClass cartProduct = productSnapshot.getValue(CartProductClass.class);
-                    cartProduct_list.add(cartProduct);
-                }
-                cartAdapter.notifyDataSetChanged();
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("FirebaseError", "Error reading data: " + error.getMessage());
-            }
-        });
+        if(mUser != null) {
+            cart_database = FirebaseDatabase.getInstance();
+            cart_databaseReference = cart_database.getReference("cart").child(mUser.getUid());
+            //Them danh sach vao day
+            cart_databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (cartProduct_list != null) {
+                        cartProduct_list.clear();
+                    }
+                    for (DataSnapshot productSnapshot : snapshot.getChildren()) {
+                        CartProductClass cartProduct = productSnapshot.getValue(CartProductClass.class);
+                        cartProduct_list.add(cartProduct);
+                    }
+                    cartAdapter.notifyDataSetChanged();
+                    TotalPrice(total_cost);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Log.e("FirebaseError", "Error reading data: " + error.getMessage());
+                }
+            });
+        } else {
+            cartProduct_list.clear();
+            Toast.makeText(getActivity(),"Yêu cầu đăng nhập",Toast.LENGTH_SHORT).show();
+        }
     }
 
+    private void TotalPrice(TextView total_cost) {
+        int total = 0;
+        for (CartProductClass cartProduct : cartProduct_list) {
+            total += Integer.parseInt(cartProduct.getCost()) * Integer.parseInt(cartProduct.getProduct_quantity());
+        }
+        total_cost.setText(total + "đ");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getProduct_list();
+    }
 }

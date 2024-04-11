@@ -79,7 +79,7 @@ public class UserFragment extends Fragment {
                 // Tạo một AlertDialog chứa các liên kết đến Facebook và Instagram
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                 builder.setTitle("Trợ giúp và hỗ trợ")
-                        .setMessage("Liên kết đến trang Facebook và Instagram:")
+                        .setMessage("Vui lòng lựa chọn phương thức liên lạc để nhận hỗ trợ:")
                         .setPositiveButton("Facebook", (dialog, which) -> {
                             // Mở liên kết đến trang Facebook
                             openLink("https://www.facebook.com/hyeng.laz/?locale=vi_VN");
@@ -139,5 +139,11 @@ public class UserFragment extends Fragment {
             name.setText(null);
             email.setText(null);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        CallingUpdateUser();
     }
 }

@@ -41,12 +41,12 @@ public class BuyProduct extends AppCompatActivity {
 ////            deliveryCost.setText("0");
 //        }
 
-        backbutton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+//        backbutton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
 //        tvplus.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
