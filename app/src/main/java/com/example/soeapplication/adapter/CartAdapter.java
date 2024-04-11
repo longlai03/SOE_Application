@@ -12,8 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.soeapplication.CartProductClass;
-import com.example.soeapplication.ProductClass;
+import com.example.soeapplication.HelperClass.CartProductClass;
 import com.example.soeapplication.R;
 
 import java.util.ArrayList;

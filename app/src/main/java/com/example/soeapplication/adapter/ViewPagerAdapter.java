@@ -7,7 +7,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.example.soeapplication.UserClass;
 import com.example.soeapplication.fragment.CartFragment;
 import com.example.soeapplication.fragment.ChatFragment;
 import com.example.soeapplication.fragment.HomeFragment;

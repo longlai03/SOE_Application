@@ -2,7 +2,6 @@ package com.example.soeapplication.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.soeapplication.CartProductClass;
-import com.example.soeapplication.ProductClass;
+import com.example.soeapplication.HelperClass.CartProductClass;
+import com.example.soeapplication.HelperClass.ProductClass;
 import com.example.soeapplication.R;
 import com.example.soeapplication.activity.ProductDetail;
 import com.google.android.gms.tasks.OnFailureListener;

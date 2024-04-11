@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.soeapplication.ProductClass;
+import com.example.soeapplication.HelperClass.ProductClass;
 import com.example.soeapplication.R;
 import com.example.soeapplication.activity.AddProduct;
 import com.example.soeapplication.adapter.ProductAdapter;

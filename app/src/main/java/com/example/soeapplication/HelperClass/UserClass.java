@@ -1,4 +1,4 @@
-package com.example.soeapplication;
+package com.example.soeapplication.HelperClass;
 
 import java.io.Serializable;
 

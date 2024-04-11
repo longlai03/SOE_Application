@@ -13,12 +13,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.soeapplication.CartProductClass;
-import com.example.soeapplication.ProductClass;
+import com.example.soeapplication.HelperClass.CartProductClass;
 import com.example.soeapplication.R;
 import com.example.soeapplication.adapter.CartAdapter;
-import com.example.soeapplication.adapter.ProductAdapter;
-import com.google.firebase.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

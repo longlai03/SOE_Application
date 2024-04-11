@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.soeapplication.R;
-import com.example.soeapplication.UserClass;
+import com.example.soeapplication.HelperClass.UserClass;
 import com.example.soeapplication.activity.Account;
 import com.example.soeapplication.activity.MyProfile;
 import com.example.soeapplication.activity.Payment;

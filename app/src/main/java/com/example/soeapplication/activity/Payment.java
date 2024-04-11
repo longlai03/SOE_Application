@@ -15,8 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.soeapplication.R;
-import com.example.soeapplication.UserClass;
-import com.google.firebase.Firebase;
+import com.example.soeapplication.HelperClass.UserClass;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;

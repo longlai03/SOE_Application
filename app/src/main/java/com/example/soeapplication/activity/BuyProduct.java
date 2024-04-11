@@ -3,16 +3,13 @@ package com.example.soeapplication.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.example.soeapplication.ProductClass;
+import com.example.soeapplication.HelperClass.ProductClass;
 import com.example.soeapplication.R;
 
 public class BuyProduct extends AppCompatActivity {

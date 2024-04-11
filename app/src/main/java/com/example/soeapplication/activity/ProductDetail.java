@@ -11,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.soeapplication.ProductClass;
+import com.example.soeapplication.HelperClass.ProductClass;
 import com.example.soeapplication.R;
 
 import java.io.Serializable;
