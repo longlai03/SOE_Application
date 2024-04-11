@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.soeapplication.HelperClass.CartProductClass;
 import com.example.soeapplication.R;
 import com.example.soeapplication.adapter.CartAdapter;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -25,6 +26,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -81,6 +84,7 @@ public class CartFragment extends Fragment {
     private FirebaseDatabase cart_database;
     private DatabaseReference cart_databaseReference;
     private TextView total_cost;
+    private CircleImageView avatar_button;
 
 
     @Override
@@ -96,6 +100,16 @@ public class CartFragment extends Fragment {
         cartRecycleview.setLayoutManager(gridLayoutManager);
         cartRecycleview.setAdapter(cartAdapter);
         getProduct_list();
+
+        avatar_button = view.findViewById(R.id.avatar_button_3);
+        avatar_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.bottom_navigation);
+                int userFragmentPosition = 3;
+                bottomNavigationView.setSelectedItemId(bottomNavigationView.getMenu().getItem(userFragmentPosition).getItemId());
+            }
+        });
         return view;
     }
 

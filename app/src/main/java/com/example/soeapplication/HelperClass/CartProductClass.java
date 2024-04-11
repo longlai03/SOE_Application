@@ -84,7 +84,7 @@ public class CartProductClass {
     public interface OnUsernameListener {
         void onUsernameReceived(String username);
     }
-    public void getUsernameFromUserUid(String userUid, CartProductClass.OnUsernameListener listener) {
+    public void getUsernameFromUserUid(String userUid, OnUsernameListener listener) {
         DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("user").child(userUid).child("name");
         userRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
