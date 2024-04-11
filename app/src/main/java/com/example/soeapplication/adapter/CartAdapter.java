@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.soeapplication.HelperClass.CartProductClass;
 import com.example.soeapplication.R;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -74,6 +76,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         holder.product_cost.setText(cartProduct.getCost());
         holder.date_of_order.setText(cartProduct.getDate_of_order());
         holder.amount.setText(cartProduct.getProduct_quantity());
+        holder.delete_cart_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DeleteCartProduct(cartProduct.getProduct_id());
+            }
+        });
     }
     private void UpdateProductQuantity(String product_id, int quantity){
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -82,6 +90,20 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
         DatabaseReference cart_databaseReference = cart_database.getReference("cart");
         if(mUser != null) {
             cart_databaseReference.child(mUser.getUid()).child(product_id).child("product_quantity").setValue(String.valueOf(quantity));
+        }
+    }
+    private void DeleteCartProduct(String product_id){
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser mUser = mAuth.getCurrentUser();
+        FirebaseDatabase cart_database = FirebaseDatabase.getInstance();
+        DatabaseReference cart_databaseReference = cart_database.getReference("cart");
+        if(mUser != null) {
+            cart_databaseReference.child(mUser.getUid()).child(product_id).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Toast.makeText(context, "Sản phẩm đã được xóa khỏi giỏ hàng", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 
@@ -95,7 +117,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         ImageView buy_product_image;
-        TextView product_title, product_seller,product_cost, date_of_order, tvplus, tvminus;
+        TextView product_title, product_seller,product_cost, date_of_order, tvplus, tvminus, delete_cart_button;
         EditText amount;
 
 
@@ -109,6 +131,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.MyViewHolder> 
             tvplus = itemView.findViewById(R.id.tvplus);
             tvminus = itemView.findViewById(R.id.tvminus);
             amount = itemView.findViewById(R.id.amount);
+            delete_cart_button = itemView.findViewById(R.id.delete_cart_button);
         }
     }
 }
