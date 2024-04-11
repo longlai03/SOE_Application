@@ -1,5 +1,6 @@
 package com.example.soeapplication.fragment;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -31,6 +33,9 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -49,6 +54,7 @@ public class HomeFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
 
     /**
      * Use this factory method to create a new instance of
@@ -90,6 +96,8 @@ public class HomeFragment extends Fragment {
     private FloatingActionButton addProductButton;
     private CircleImageView avatar_button;
     private TextView numberofProduct;
+    private Button filter_button;
+    private AlertDialog dialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -112,6 +120,14 @@ public class HomeFragment extends Fragment {
                 startActivity(i);
             }
         });
+
+        filter_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFilterDialog();
+            }
+        });
+
         search_editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -145,6 +161,93 @@ public class HomeFragment extends Fragment {
         });
         return view;
     }
+
+    private void showFilterDialog(){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Lọc theo giá");
+
+        View view =  getLayoutInflater().inflate(R.layout.dialog_price, null);
+        builder.setView(view);
+        AlertDialog dialog = builder.create();
+
+        Button lowToHighButton = view.findViewById(R.id.low_to_high_button);
+        Button highToLowButton = view.findViewById(R.id.high_to_low_button);
+
+        lowToHighButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (dialog != null) {
+                    Query query = product_databaseReference.orderByChild("cost");
+
+                    query.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            product_list.clear();
+                            for (DataSnapshot productSnapshot : snapshot.getChildren()) {
+                                ProductClass product = productSnapshot.getValue(ProductClass.class);
+
+                                double cost = Double.parseDouble(product.getCost());
+                                product.setCost(String.valueOf(cost));
+
+                                product_list.add(product);
+                                numberofProduct.setText(String.valueOf(product_list.size()));
+                            }
+                            productAdapter.notifyDataSetChanged();
+                            Log.e("Home","Da sap xep");
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            Log.e("FirebaseError", "Error reading data: " + error.getMessage());
+                        }
+                    });
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        highToLowButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (dialog != null) {
+                    Query query = product_databaseReference.orderByChild("cost");
+
+                    query.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            product_list.clear();
+                            for (DataSnapshot productSnapshot : snapshot.getChildren()) {
+                                ProductClass product = productSnapshot.getValue(ProductClass.class);
+                                product_list.add(product);
+                                numberofProduct.setText(String.valueOf(product_list.size()));
+                            }
+
+
+                            Collections.sort(product_list, new Comparator<ProductClass>() {
+                                @Override
+                                public int compare(ProductClass p1, ProductClass p2) {
+                                    return Double.compare(Double.parseDouble(p1.getCost()), Double.parseDouble(p2.getCost()));
+                                }
+                            });
+                            Collections.reverse(product_list);
+                            productAdapter.notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                            Log.e("FirebaseError", "Error reading data: " + error.getMessage());
+                        }
+                    });
+                }
+            }
+        });
+
+        // Hiển thị dialog
+
+        dialog.show();
+    }
+
 
     private void getProduct_list() {
         //Them danh sach vao day
@@ -203,5 +306,6 @@ public class HomeFragment extends Fragment {
         search_editText = view.findViewById(R.id.search_editText);
         avatar_button = view.findViewById(R.id.avatar_button);
         numberofProduct = view.findViewById(R.id.numberofProduct);
+        filter_button = view.findViewById(R.id.filter_button);
     }
 }

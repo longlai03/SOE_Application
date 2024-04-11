@@ -57,6 +57,7 @@ public class Payment extends AppCompatActivity {
                             UpdateBalance(amount);
                         } else {
                             Toast.makeText(Payment.this, "Vui lòng nhập số tiền", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
                         }
                     }
                 });
