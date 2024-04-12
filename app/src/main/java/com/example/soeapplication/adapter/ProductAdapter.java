@@ -77,32 +77,37 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.MyViewHo
                 FirebaseAuth mAuth = FirebaseAuth.getInstance();
                 FirebaseUser mUser = mAuth.getCurrentUser();
                 ProductClass clickedProduct = productList.get(holder.getAdapterPosition());
-                CartProductClass cartProduct = new CartProductClass();
-                cartProduct.setUseruid(mUser.getUid());
-                cartProduct.setName(clickedProduct.getName());
-                cartProduct.setCost(clickedProduct.getCost());
-                cartProduct.setImageUrl(clickedProduct.getImageUrl());
-                cartProduct.setProduct_id(clickedProduct.getProduct_id());
-                cartProduct.setProduct_quantity("1");
 
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                String currentDate = sdf.format(new Date());
-                cartProduct.setDate_of_order(currentDate);
+                if (mUser != null) {
+                    CartProductClass cartProduct = new CartProductClass();
+                    cartProduct.setUseruid(mUser.getUid());
+                    cartProduct.setName(clickedProduct.getName());
+                    cartProduct.setCost(clickedProduct.getCost());
+                    cartProduct.setImageUrl(clickedProduct.getImageUrl());
+                    cartProduct.setProduct_id(clickedProduct.getProduct_id());
+                    cartProduct.setProduct_quantity("1");
 
-                FirebaseDatabase cart_firebaseDatabase = FirebaseDatabase.getInstance();
-                DatabaseReference cart_databaseReference = cart_firebaseDatabase.getReference("cart").child(mUser.getUid()).child(cartProduct.getProduct_id());
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                    String currentDate = sdf.format(new Date());
+                    cartProduct.setDate_of_order(currentDate);
 
-                cart_databaseReference.setValue(cartProduct).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        Toast.makeText(context,"Sản phẩm đã được thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(context,"Lỗi khi thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                    FirebaseDatabase cart_firebaseDatabase = FirebaseDatabase.getInstance();
+                    DatabaseReference cart_databaseReference = cart_firebaseDatabase.getReference("cart").child(mUser.getUid()).child(cartProduct.getProduct_id());
+
+                    cart_databaseReference.setValue(cartProduct).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Toast.makeText(context, "Sản phẩm đã được thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(context, "Lỗi khi thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                } else {
+                    Toast.makeText(context, "Yêu cầu đăng nhập để sử dụng chức năng này", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

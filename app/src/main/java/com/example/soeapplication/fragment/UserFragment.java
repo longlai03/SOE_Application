@@ -145,7 +145,7 @@ public class UserFragment extends Fragment {
                         Log.e("UserName", "Name: " + userClass.getName());
                         email.setText(userClass.getEmail());
                     } else {
-                        name.setText("Người dùng hiện chưa đăng nhập");
+                        name.setText("Khách");
                         email.setText(null);
                     }
                 }
@@ -156,7 +156,7 @@ public class UserFragment extends Fragment {
                 }
             });
         } else {
-            name.setText("Người dùng hiện chưa đăng nhập");
+            name.setText("Khách");
             email.setText(null);
         }
     }
