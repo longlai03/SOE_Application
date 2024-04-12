@@ -114,7 +114,6 @@ public class Home extends AppCompatActivity {
                             }
                         }
                     } else {
-                        finish();
                     }
                 }
             });
@@ -125,9 +124,9 @@ public class Home extends AppCompatActivity {
     }
 
     private void CallingUpdateUser() {
-        User_Database = FirebaseDatabase.getInstance();
-        User_reference = User_Database.getReference("user");
         if (mUser != null) {
+            User_Database = FirebaseDatabase.getInstance();
+            User_reference = User_Database.getReference("user");
             User_reference.child(mUser.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -144,7 +143,6 @@ public class Home extends AppCompatActivity {
                 }
             });
         } else {
-            Toast.makeText(this,"Nguoi dung chua dang nhap!",Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -159,7 +157,6 @@ public class Home extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         Log.e("Home", "CallingResume");
-        Log.e("Home", "mUser = " + mUser.getEmail());
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
         CallingUpdateUser();

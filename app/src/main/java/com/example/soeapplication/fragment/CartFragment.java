@@ -174,7 +174,7 @@ public class CartFragment extends Fragment {
             });
         } else {
             cartProduct_list.clear();
-            Toast.makeText(getActivity(),"Yêu cầu đăng nhập",Toast.LENGTH_SHORT).show();
+            total_cost.setText("0");
         }
     }
     private void getAddress(){

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,7 @@ import androidx.fragment.app.Fragment;
 import com.example.soeapplication.R;
 import com.example.soeapplication.HelperClass.UserClass;
 import com.example.soeapplication.activity.Account;
+import com.example.soeapplication.activity.Login;
 import com.example.soeapplication.activity.MyProfile;
 import com.example.soeapplication.activity.Balance;
 import com.google.firebase.auth.FirebaseAuth;
@@ -69,8 +71,13 @@ public class UserFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // Tạo Intent để mở Account activity
-                Intent intent = new Intent(getActivity(), Account.class);
-                startActivity(intent);
+                if (mUser != null) {
+                    Intent intent = new Intent(getActivity(), Account.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getActivity(), Login.class);
+                    startActivity(intent);
+                }
             }
         });
 
@@ -100,8 +107,12 @@ public class UserFragment extends Fragment {
         bankButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity(), Balance.class);
-                startActivity(i);
+                if (mUser != null) {
+                    Intent i = new Intent(getActivity(), Balance.class);
+                    startActivity(i);
+                } else {
+                    Toast.makeText(getActivity(),"Yêu cầu đăng nhập", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -134,7 +145,7 @@ public class UserFragment extends Fragment {
                         Log.e("UserName", "Name: " + userClass.getName());
                         email.setText(userClass.getEmail());
                     } else {
-                        name.setText(null);
+                        name.setText("Người dùng hiện chưa đăng nhập");
                         email.setText(null);
                     }
                 }

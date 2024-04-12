@@ -16,9 +16,6 @@
             android:name=".activity.Balance"
             android:exported="false" />
         <activity
-            android:name=".activity.BuyProduct"
-            android:exported="false" />
-        <activity
             android:name=".activity.Account"
             android:exported="false" />
         <activity
