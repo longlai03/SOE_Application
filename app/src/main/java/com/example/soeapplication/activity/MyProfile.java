@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.soeapplication.R;
@@ -33,6 +35,7 @@ public class MyProfile extends AppCompatActivity {
     private TextInputEditText emailEditText, passwordEditText, countryEditText, districtEditText, streetEditText;
     private TextInputLayout emailLayoutEditText, passwordLayoutEditText, countryLayoutEditText, districtLayoutEditText, streetLayoutEditText, accountLayoutEdittext;
     private Button updateButton;
+    private TextView forgot_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +54,17 @@ public class MyProfile extends AppCompatActivity {
                 }
             }
         });
-
+        forgot_password.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mUser != null) {
+                    Intent intent = new Intent(MyProfile.this, ForgotPassword.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(MyProfile.this, "Hãy đăng nhập để sử dụng chức năng này", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void CallingUpdateUser() {
@@ -140,6 +153,7 @@ public class MyProfile extends AppCompatActivity {
         districtLayoutEditText = findViewById(R.id.districtTextInputLayout);
         streetLayoutEditText = findViewById(R.id.streetTextInputLayout);
         updateButton = findViewById(R.id.update_button);
+        forgot_password = findViewById(R.id.forgot_password_btn);
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
         user_database = FirebaseDatabase.getInstance();

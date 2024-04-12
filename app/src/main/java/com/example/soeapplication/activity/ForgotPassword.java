@@ -56,6 +56,7 @@ public class ForgotPassword extends AppCompatActivity {
             public void onSuccess(Void unused) {
                 progressDialog.dismiss();
                 Toast.makeText(ForgotPassword.this,"Email đã được gửi",Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 
