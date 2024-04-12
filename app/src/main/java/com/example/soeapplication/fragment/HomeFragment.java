@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -22,9 +23,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.soeapplication.HelperClass.ProductClass;
 import com.example.soeapplication.R;
 import com.example.soeapplication.activity.AddProduct;
+import com.example.soeapplication.activity.Balance;
 import com.example.soeapplication.adapter.ProductAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -92,6 +96,8 @@ public class HomeFragment extends Fragment {
     private ProductAdapter productAdapter;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference product_databaseReference;
+    private FirebaseAuth mAuth;
+    private FirebaseUser mUser;
     private FloatingActionButton addProductButton;
     private CircleImageView avatar_button;
     private TextView numberofProduct;
@@ -100,7 +106,6 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         AnhXa(view);
         product_list = new ArrayList<>();
@@ -114,8 +119,14 @@ public class HomeFragment extends Fragment {
         addProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity(), AddProduct.class);
-                startActivity(i);
+                mAuth = FirebaseAuth.getInstance();
+                mUser = mAuth.getCurrentUser();
+                if (mUser != null) {
+                    Intent i = new Intent(getActivity(), AddProduct.class);
+                    startActivity(i);
+                } else {
+                    Toast.makeText(getActivity(), "Yêu cầu đăng nhập", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -160,12 +171,12 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    private void showFilterDialog(){
+    private void showFilterDialog() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Lọc theo giá");
 
-        View view =  getLayoutInflater().inflate(R.layout.dialog_sort, null);
+        View view = getLayoutInflater().inflate(R.layout.dialog_sort, null);
         builder.setView(view);
         AlertDialog dialog = builder.create();
 
@@ -192,7 +203,7 @@ public class HomeFragment extends Fragment {
                                 numberofProduct.setText(String.valueOf(product_list.size()));
                             }
                             productAdapter.notifyDataSetChanged();
-                            Log.e("Home","Da sap xep");
+                            Log.e("Home", "Da sap xep");
                         }
 
                         @Override
