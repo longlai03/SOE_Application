@@ -61,34 +61,38 @@ public class ProductDetail extends AppCompatActivity {
                 if(product != null) {
                     FirebaseAuth mAuth = FirebaseAuth.getInstance();
                     FirebaseUser mUser = mAuth.getCurrentUser();
-                    CartProductClass cartProduct = new CartProductClass();
-                    cartProduct.setUseruid(mUser.getUid());
-                    cartProduct.setName(product.getName());
-                    cartProduct.setCost(product.getCost());
-                    cartProduct.setImageUrl(product.getImageUrl());
-                    cartProduct.setProduct_id(product.getProduct_id());
-                    cartProduct.setProduct_quantity("1");
+                    if(mUser != null) {
+                        CartProductClass cartProduct = new CartProductClass();
+                        cartProduct.setUseruid(mUser.getUid());
+                        cartProduct.setName(product.getName());
+                        cartProduct.setCost(product.getCost());
+                        cartProduct.setImageUrl(product.getImageUrl());
+                        cartProduct.setProduct_id(product.getProduct_id());
+                        cartProduct.setProduct_quantity("1");
 
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                    String currentDate = sdf.format(new Date());
-                    cartProduct.setDate_of_order(currentDate);
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                        String currentDate = sdf.format(new Date());
+                        cartProduct.setDate_of_order(currentDate);
 
-                    FirebaseDatabase cart_firebaseDatabase = FirebaseDatabase.getInstance();
-                    DatabaseReference cart_databaseReference = cart_firebaseDatabase.getReference("cart").child(mUser.getUid()).child(cartProduct.getProduct_id());
+                        FirebaseDatabase cart_firebaseDatabase = FirebaseDatabase.getInstance();
+                        DatabaseReference cart_databaseReference = cart_firebaseDatabase.getReference("cart").child(mUser.getUid()).child(cartProduct.getProduct_id());
 
-                    cart_databaseReference.setValue(cartProduct).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            Toast.makeText(ProductDetail.this, "Sản phẩm đã được thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(ProductDetail.this, "Lỗi khi thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
-                    });
+                        cart_databaseReference.setValue(cartProduct).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+                                Toast.makeText(ProductDetail.this, "Sản phẩm đã được thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(ProductDetail.this, "Lỗi khi thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                        });
+                    } else {
+                        Toast.makeText(ProductDetail.this, "Yêu cầu đăng nhập để sử dụng chức năng này", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
                     Toast.makeText(ProductDetail.this, "Lỗi khi thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
                     finish();

@@ -200,7 +200,7 @@ public class CartFragment extends Fragment {
                 }
             });
         } else {
-            address_text.setText("Người dùng chưa đăng ");
+            address_text.setText("Người dùng chưa đăng nhập");
         }
     }
 

@@ -156,7 +156,7 @@ public class UserFragment extends Fragment {
                 }
             });
         } else {
-            name.setText(null);
+            name.setText("Người dùng hiện chưa đăng nhập");
             email.setText(null);
         }
     }
