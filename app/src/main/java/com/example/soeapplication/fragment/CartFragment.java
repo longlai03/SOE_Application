@@ -1,10 +1,12 @@
 package com.example.soeapplication.fragment;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,7 +16,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.soeapplication.HelperClass.CartProductClass;
+import com.example.soeapplication.HelperClass.UserClass;
 import com.example.soeapplication.R;
+import com.example.soeapplication.activity.PaymentDialog;
 import com.example.soeapplication.adapter.CartAdapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -81,9 +85,10 @@ public class CartFragment extends Fragment {
     private ArrayList<CartProductClass> cartProduct_list;
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
-    private FirebaseDatabase cart_database;
-    private DatabaseReference cart_databaseReference;
-    private TextView total_cost;
+    private FirebaseDatabase cart_database, user_database;
+    private DatabaseReference cart_databaseReference, user_databaseReference;
+    private TextView total_cost, address_text;
+    private Button checkout_button;
     private CircleImageView avatar_button;
 
 
@@ -100,6 +105,7 @@ public class CartFragment extends Fragment {
         cartRecycleview.setLayoutManager(gridLayoutManager);
         cartRecycleview.setAdapter(cartAdapter);
         getProduct_list();
+        getAddress();
 
         avatar_button = view.findViewById(R.id.avatar_button_3);
         avatar_button.setOnClickListener(new View.OnClickListener() {
@@ -110,12 +116,32 @@ public class CartFragment extends Fragment {
                 bottomNavigationView.setSelectedItemId(bottomNavigationView.getMenu().getItem(userFragmentPosition).getItemId());
             }
         });
+        checkout_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAuth = FirebaseAuth.getInstance();
+                mUser = mAuth.getCurrentUser();
+                if(mUser != null && TextUtils.isDigitsOnly(total_cost.getText().toString())) {
+                    if(Integer.parseInt(total_cost.getText().toString()) > 0) {
+                        String totalPrice = total_cost.getText().toString();
+                        PaymentDialog paymentDialog = new PaymentDialog(getActivity(), totalPrice);
+                        paymentDialog.show();
+                    } else {
+                        Toast.makeText(getActivity(),"Hãy thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(getActivity(),"Yêu cầu đăng nhập", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         return view;
     }
 
     private void AnhXa(View view) {
         cartRecycleview = view.findViewById(R.id.cart_recyclerView);
         total_cost = view.findViewById(R.id.total_product_cost);
+        address_text = view.findViewById(R.id.address_text);
+        checkout_button = view.findViewById(R.id.checkout_button);
     }
 
     private void getProduct_list() {
@@ -151,18 +177,45 @@ public class CartFragment extends Fragment {
             Toast.makeText(getActivity(),"Yêu cầu đăng nhập",Toast.LENGTH_SHORT).show();
         }
     }
+    private void getAddress(){
+        mAuth = FirebaseAuth.getInstance();
+        mUser = mAuth.getCurrentUser();
+        if(mUser != null){
+            user_database = FirebaseDatabase.getInstance();
+            user_databaseReference = user_database.getReference("user").child(mUser.getUid());
+            user_databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.exists()){
+                        UserClass user = snapshot.getValue(UserClass.class);
+                        address_text.setText(user.getAddress());
+                    } else {
+                        address_text.setText("Người dùng chưa cập nhật địa chỉ");
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        } else {
+            address_text.setText("Người dùng chưa đăng ");
+        }
+    }
 
     private void TotalPrice(TextView total_cost) {
         int total = 0;
         for (CartProductClass cartProduct : cartProduct_list) {
             total += Integer.parseInt(cartProduct.getCost()) * Integer.parseInt(cartProduct.getProduct_quantity());
         }
-        total_cost.setText(total + "đ");
+        total_cost.setText(String.valueOf(total));
     }
 
     @Override
     public void onResume() {
         super.onResume();
         getProduct_list();
+        getAddress();
     }
 }

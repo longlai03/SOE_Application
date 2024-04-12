@@ -24,7 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class Payment extends AppCompatActivity {
+public class Balance extends AppCompatActivity {
     TextView txtSodu;
     ImageButton imgnaptien;
     FirebaseDatabase user_firebasedatabase;
@@ -41,7 +41,7 @@ public class Payment extends AppCompatActivity {
         imgnaptien.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(Payment.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(Balance.this);
                 LayoutInflater inflater = getLayoutInflater();
                 View dialogView = inflater.inflate(R.layout.dialog_box_payin, null);
                 builder.setView(dialogView);
@@ -56,7 +56,7 @@ public class Payment extends AppCompatActivity {
                             int amount = Integer.parseInt(amountStr);
                             UpdateBalance(amount);
                         } else {
-                            Toast.makeText(Payment.this, "Vui lòng nhập số tiền", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Balance.this, "Vui lòng nhập số tiền", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
                         }
                     }
@@ -101,7 +101,7 @@ public class Payment extends AppCompatActivity {
                 }
             });
         } else {
-            Toast.makeText(Payment.this, "Yêu cầu đăng nhập", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Balance.this, "Yêu cầu đăng nhập", Toast.LENGTH_SHORT).show();
         }
     }
     private void UpdateBalance(int amount) {

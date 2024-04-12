@@ -32,7 +32,7 @@ public class ProductDetail extends AppCompatActivity {
     TextView productName, productCost, productInfo, productSeller;
     ImageView productImage;
     ImageButton backButton;
-    Button addtoCart, buyProduct;
+    Button addtoCart;
     ProductClass product;
 
     @Override
@@ -95,14 +95,6 @@ public class ProductDetail extends AppCompatActivity {
                 }
             }
         });
-        buyProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(ProductDetail.this, BuyProduct.class);
-                i.putExtra("product", (Serializable) product);
-                startActivity(i);
-            }
-        });
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,9 +108,8 @@ public class ProductDetail extends AppCompatActivity {
         productName = findViewById(R.id.Product_Name);
         productCost = findViewById(R.id.Product_cost);
         productInfo = findViewById(R.id.Product_info);
-        productSeller = findViewById(R.id.Product_seller);
+        productSeller = findViewById(R.id.cart_product_seller);
         productImage = findViewById(R.id.product_image);
         addtoCart = findViewById(R.id.addtoCart_button);
-        buyProduct = findViewById(R.id.buy_button);
     }
 }

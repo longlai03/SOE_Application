@@ -18,7 +18,7 @@ import com.example.soeapplication.R;
 import com.example.soeapplication.HelperClass.UserClass;
 import com.example.soeapplication.activity.Account;
 import com.example.soeapplication.activity.MyProfile;
-import com.example.soeapplication.activity.Payment;
+import com.example.soeapplication.activity.Balance;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -100,7 +100,7 @@ public class UserFragment extends Fragment {
         bankButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity(), Payment.class);
+                Intent i = new Intent(getActivity(), Balance.class);
                 startActivity(i);
             }
         });

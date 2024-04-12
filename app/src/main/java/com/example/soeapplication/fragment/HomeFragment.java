@@ -33,7 +33,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -97,7 +96,6 @@ public class HomeFragment extends Fragment {
     private CircleImageView avatar_button;
     private TextView numberofProduct;
     private Button filter_button;
-    private AlertDialog dialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -167,7 +165,7 @@ public class HomeFragment extends Fragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Lọc theo giá");
 
-        View view =  getLayoutInflater().inflate(R.layout.dialog_price, null);
+        View view =  getLayoutInflater().inflate(R.layout.dialog_sort, null);
         builder.setView(view);
         AlertDialog dialog = builder.create();
 
